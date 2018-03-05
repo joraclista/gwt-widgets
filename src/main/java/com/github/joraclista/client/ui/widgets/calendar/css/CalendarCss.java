@@ -49,4 +49,6 @@ public interface CalendarCss extends CssResource {
     String selected();
 
     String monthSelectPanel();
+
+    String yearSelectPanel();
 }

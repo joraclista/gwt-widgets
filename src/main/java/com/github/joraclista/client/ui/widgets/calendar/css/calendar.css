@@ -96,13 +96,20 @@
     background: #00BCD4;
 }
 
-.monthSelectPanel {
+.monthSelectPanel, .yearSelectPanel {
      display: grid;
      grid-template-columns: repeat(4, 1fr);
 }
 
 .monthSelectPanel div {
     padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.yearSelectPanel div {
+    padding: 10px;
+    font-size: 13px;
     box-sizing: border-box;
     text-align: center;
 }

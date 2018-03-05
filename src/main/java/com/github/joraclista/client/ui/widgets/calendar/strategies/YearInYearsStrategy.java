@@ -47,13 +47,16 @@ class YearInYearsStrategy extends CalendarStrategy {
         handlers.clear();
 
         selectionPanel.setStyleName(css.daysPanel(), false);
-        selectionPanel.setStyleName(css.monthSelectPanel(), true);
+        selectionPanel.setStyleName(css.monthSelectPanel(), false);
+        selectionPanel.setStyleName(css.yearSelectPanel(), true);
 
 
         range(-offset, offset).forEach(_offset -> {
             Date _date = copyDate(date);
             addMonthsToDate(_date, _offset * 12);
             Label label = new Label(getFormat("yyyy").format(_date));
+            label.setStyleName(css.selected(), _date.getYear() == new Date().getYear());
+
             selectionPanel.add(label);
 
             handlers.add(label.addClickHandler(event -> ValueChangeEvent.fire(YearInYearsStrategy.this, new RenderModel(_date, getSelectionType().down()))));

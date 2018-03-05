@@ -42,10 +42,13 @@ class MonthInAYearStrategy extends CalendarStrategy {
         selectionPanel.clear();
         selectionPanel.setStyleName(css.daysPanel(), false);
         selectionPanel.setStyleName(css.monthSelectPanel(), true);
+        selectionPanel.setStyleName(css.yearSelectPanel(), false);
+
         String[] months = css.monthShortcut().split(" ");
 
         range(0, months.length).forEach(monthIdx -> {
             Label monthLabel = new Label(months[monthIdx]);
+            monthLabel.setStyleName(css.selected(), monthIdx == new Date().getMonth() && date.getYear() == new Date().getYear());
             selectionPanel.add(monthLabel);
 
             if (handlers.get(monthIdx) != null) {

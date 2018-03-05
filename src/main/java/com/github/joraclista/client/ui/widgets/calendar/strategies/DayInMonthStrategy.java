@@ -46,6 +46,7 @@ class DayInMonthStrategy extends CalendarStrategy {
 
         selectionPanel.setStyleName(css.daysPanel(), true);
         selectionPanel.setStyleName(css.monthSelectPanel(), false);
+        selectionPanel.setStyleName(css.yearSelectPanel(), false);
 
         asList(css.weekDaysShortcut().split(" ")).forEach(day -> selectionPanel.add(new Label(day)));
 
@@ -63,13 +64,17 @@ class DayInMonthStrategy extends CalendarStrategy {
 
         days.forEach(day -> {
             Label dayLabel = new Label(day.getDate() + "");
-            dayLabel.setStyleName(css.otherMonthDayLabel(), day.getMonth() != new Date().getMonth());
+            dayLabel.setStyleName(css.otherMonthDayLabel(), !isSameMonthYear(day, date));
             dayLabel.setStyleName(css.selected(), isSameDate(day, new Date()));
             selectionPanel.add(dayLabel);
 
 
             handlers.add(dayLabel.addClickHandler(event -> new RenderModel(day, getSelectionType().down())));
         });
+    }
+
+    private boolean isSameMonthYear(Date date1, Date date2) {
+        return date1.getMonth() == date2.getMonth() && date1.getYear() == date2.getYear();
     }
 
     @Override
