@@ -1,6 +1,6 @@
 package com.github.joraclista.client.ui.widgets.calendar.strategies;
 
-import com.github.joraclista.client.ui.widgets.calendar.RedrawModel;
+import com.github.joraclista.client.ui.widgets.calendar.RenderModel;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -18,7 +18,7 @@ import static java.util.stream.IntStream.range;
  * Created by Alisa
  * version 1.0.
  */
-class YearStrategy extends CalendarStrategy {
+class MonthInAYearStrategy extends CalendarStrategy {
 
     private Map<Integer, HandlerRegistration> handlers = new HashMap<>();
 
@@ -54,7 +54,7 @@ class YearStrategy extends CalendarStrategy {
             handlers.put(monthIdx, monthLabel.addClickHandler(event -> {
                 Date newDate = date;
                 date.setMonth(monthIdx);
-                ValueChangeEvent.fire(YearStrategy.this, new RedrawModel(newDate, SelectionType.SELECT_DAY_IN_A_MONTH));
+                ValueChangeEvent.fire(MonthInAYearStrategy.this, new RenderModel(newDate, getSelectionType().down()));
             }));
         });
     }
@@ -63,5 +63,9 @@ class YearStrategy extends CalendarStrategy {
         return date.getYear() + 1900;
     }
 
+    @Override
+    protected SelectionType getSelectionType() {
+        return SelectionType.SELECT_MONTH_IN_A_YEAR;
+    }
 
 }

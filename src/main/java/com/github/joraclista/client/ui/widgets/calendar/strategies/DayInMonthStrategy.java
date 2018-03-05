@@ -1,6 +1,6 @@
 package com.github.joraclista.client.ui.widgets.calendar.strategies;
 
-import com.github.joraclista.client.ui.widgets.calendar.RedrawModel;
+import com.github.joraclista.client.ui.widgets.calendar.RenderModel;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -18,7 +18,7 @@ import static java.util.Arrays.asList;
  * Created by Alisa
  * version 1.0.
  */
-class MonthStrategy extends CalendarStrategy {
+class DayInMonthStrategy extends CalendarStrategy {
 
     private List<HandlerRegistration> handlers = new LinkedList<>();
 
@@ -68,8 +68,13 @@ class MonthStrategy extends CalendarStrategy {
             selectionPanel.add(dayLabel);
 
 
-            handlers.add(dayLabel.addClickHandler(event -> new RedrawModel(day, SelectionType.SELECT_DAY_IN_A_MONTH)));
+            handlers.add(dayLabel.addClickHandler(event -> new RenderModel(day, getSelectionType().down())));
         });
+    }
+
+    @Override
+    protected SelectionType getSelectionType() {
+        return SelectionType.SELECT_DAY_IN_A_MONTH;
     }
 
 

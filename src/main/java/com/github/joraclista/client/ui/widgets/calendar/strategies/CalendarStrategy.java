@@ -1,6 +1,6 @@
 package com.github.joraclista.client.ui.widgets.calendar.strategies;
 
-import com.github.joraclista.client.ui.widgets.calendar.RedrawModel;
+import com.github.joraclista.client.ui.widgets.calendar.RenderModel;
 import com.github.joraclista.client.ui.widgets.calendar.css.CalendarBundle;
 import com.github.joraclista.client.ui.widgets.calendar.css.CalendarCss;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
@@ -17,7 +17,7 @@ import java.util.Date;
  * Created by Alisa
  * version 1.0.
  */
-public abstract class CalendarStrategy implements HasValueChangeHandlers<RedrawModel> {
+public abstract class CalendarStrategy implements HasValueChangeHandlers<RenderModel> {
 
     protected CalendarCss css = CalendarBundle.BUNDLE.calendarCss();
     protected Date date;
@@ -42,11 +42,11 @@ public abstract class CalendarStrategy implements HasValueChangeHandlers<RedrawM
 
     public static CalendarStrategy from(SelectionType selectionStrategies) {
         switch (selectionStrategies) {
-            case SELECT_DAY_IN_A_MONTH: return new MonthStrategy();
-            case SELECT_YEAR: return new YearStrategy();
-            case SELECT_MONTH_IN_A_YEAR: return new YearStrategy();
+            case SELECT_DAY_IN_A_MONTH: return new DayInMonthStrategy();
+            case SELECT_YEAR_IN_YEARS: return new YearInYearsStrategy();
+            case SELECT_MONTH_IN_A_YEAR: return new MonthInAYearStrategy();
         }
-        return new MonthStrategy();
+        return new DayInMonthStrategy();
     }
 
 
@@ -74,7 +74,9 @@ public abstract class CalendarStrategy implements HasValueChangeHandlers<RedrawM
 
 
     @Override
-    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<RedrawModel> handler) {
+    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<RenderModel> handler) {
         return ensureHandlers().addHandler(ValueChangeEvent.getType(), handler);
     }
+
+    protected abstract SelectionType getSelectionType();
 }

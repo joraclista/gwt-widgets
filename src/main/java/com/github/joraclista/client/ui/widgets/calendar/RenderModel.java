@@ -8,11 +8,11 @@ import java.util.Date;
  * Created by Alisa
  * version 1.0.
  */
-public class RedrawModel {
+public class RenderModel {
     private Date date;
     private SelectionType selectionType;
 
-    public RedrawModel(Date date, SelectionType selectionType) {
+    public RenderModel(Date date, SelectionType selectionType) {
         this.date = date;
         this.selectionType = selectionType;
     }

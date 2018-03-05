@@ -101,7 +101,7 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
             renderingStrategiesMap.put(strategy, calendarStrategy);
             calendarStrategy.addValueChangeHandler(event -> {
                 date = event.getValue().getDate();
-                setStrategy(event.getValue().getSelectionStrategies());
+                setStrategy(event.getValue().getSelectionType());
             });
         });
 
