@@ -14,9 +14,13 @@ public interface CalendarCss extends CssResource {
 
     String dateLabelFormat();
 
+    String weekDaysShortcut();
+
     int _width();
 
     int _height();
+
+    int maxRows();
 
     String dateLabel();
 

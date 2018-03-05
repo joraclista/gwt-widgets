@@ -7,19 +7,19 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.datepicker.client.CalendarUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import static com.github.joraclista.client.ui.common.TaskUtil.scheduleRepeating;
 import static com.google.gwt.i18n.client.DateTimeFormat.getFormat;
+import static com.google.gwt.user.datepicker.client.CalendarUtil.*;
+import static java.util.Arrays.asList;
 
 /**
  * Created by Alisa
@@ -56,10 +56,11 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
     FlowPanel buttons;
 
     public Calendar(CalendarCss css) {
-        css.ensureInjected();
         this.css = css;
+        this.css.ensureInjected();
 
         initWidget(ourUiBinder.createAndBindUi(this));
+
         this.date = new Date();
 
         this.asWidget().addStyleName(css.main());
@@ -78,49 +79,38 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
         this.daysPanel.addStyleName(css.daysPanel());
 
         monthLabel.setText(getFormat(css.monthLabelFormat()).format(this.date));
-
         dateLabel.setText(getFormat(css.dateLabelFormat()).format(this.date));
-        timeLabel.setText(getFormat(css.timeLabelFormat()).format(Calendar.this.date));
+        updateTimeLabel(this.date);
 
-        Timer timer = new Timer() {
+        scheduleRepeating(() -> updateTimeLabel(new Date()), 1000);
 
-            @Override
-            public void run() {
-                Date date = new Date();
-                timeLabel.setText(getFormat("hh:mm:ss a").format(date));
-            }
-        };
-        timer.scheduleRepeating(1000);
-        timer.run();
-
-
-        draw(new Date());
+        drawMonthForDate(new Date());
     }
 
-    private void draw(Date start) {
+    private void updateTimeLabel(Date date) {
+        timeLabel.setText(getFormat(css.timeLabelFormat()).format(date));
+    }
+
+    private void drawMonthForDate(Date start) {
         daysPanel.clear();
-        Arrays.asList("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa").forEach(day -> daysPanel.add(new Label(day)));
+        asList(css.weekDaysShortcut().split(" ")).forEach(day -> daysPanel.add(new Label(day)));
+
         Date current = start;
-        CalendarUtil.setToFirstDayOfMonth(start);
+        setToFirstDayOfMonth(start);
         while (current.getDay() != 0) {
-            CalendarUtil.addDaysToDate(start, -1);
+            addDaysToDate(start, -1);
         }
 
         List<Date> days = new ArrayList<>();
-        for(int i =0; i<42; i++){
-
-            days.add(CalendarUtil.copyDate(current));
-            CalendarUtil.addDaysToDate(current, 1);
+        for(int i = 0; i < css.weekDaysShortcut().split(" ").length * css.maxRows(); i++){
+            days.add(copyDate(current));
+            addDaysToDate(current, 1);
         }
 
         days.forEach(day -> {
             Label dayLabel = new Label(day.getDate() + "");
-            if (day.getMonth() != this.date.getMonth()) {
-                dayLabel.addStyleName(css.otherMonthDayLabel());
-            }
-            if (CalendarUtil.isSameDate(day, this.date)) {
-                dayLabel.addStyleName(css.selected());
-            }
+            dayLabel.setStyleName(css.otherMonthDayLabel(), day.getMonth() != this.date.getMonth());
+            dayLabel.setStyleName(css.selected(), isSameDate(day, this.date));
             daysPanel.add(dayLabel);
         });
 //        upButton.addClickHandler(new ClickHandler() {
