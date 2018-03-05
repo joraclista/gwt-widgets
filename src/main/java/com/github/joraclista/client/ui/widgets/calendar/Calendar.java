@@ -5,7 +5,6 @@ import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
@@ -20,20 +19,21 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import static com.google.gwt.i18n.client.DateTimeFormat.getFormat;
+
 /**
  * Created by Alisa
  * version 1.0.
  */
-public class CalendarWidget extends Composite implements HasValueChangeHandlers<Date> {
+public class Calendar extends Composite implements HasValueChangeHandlers<Date> {
+
+    interface CalendarUiBinder extends UiBinder<FlowPanel, Calendar> {
+    }
+
+    private static CalendarUiBinder ourUiBinder = GWT.create(CalendarUiBinder.class);
 
 
     private final CalendarCss css;
-
-    interface HorizontalDropDownUiBinder extends UiBinder<FlowPanel, CalendarWidget> {
-    }
-
-    private static HorizontalDropDownUiBinder ourUiBinder = GWT.create(HorizontalDropDownUiBinder.class);
-
     private Date date;
 
     @UiField
@@ -55,9 +55,10 @@ public class CalendarWidget extends Composite implements HasValueChangeHandlers<
     @UiField
     FlowPanel buttons;
 
-    public CalendarWidget(CalendarCss css) {
+    public Calendar(CalendarCss css) {
         css.ensureInjected();
         this.css = css;
+
         initWidget(ourUiBinder.createAndBindUi(this));
         this.date = new Date();
 
@@ -76,17 +77,17 @@ public class CalendarWidget extends Composite implements HasValueChangeHandlers<
 
         this.daysPanel.addStyleName(css.daysPanel());
 
-        monthLabel.setText(DateTimeFormat.getFormat("MMM yyyy").format(this.date));
+        monthLabel.setText(getFormat(css.monthLabelFormat()).format(this.date));
 
-        dateLabel.setText(DateTimeFormat.getFormat("EEE, MMM d, yyyy").format(this.date));
-        timeLabel.setText(DateTimeFormat.getFormat("hh:mm:ss a").format(CalendarWidget.this.date));
+        dateLabel.setText(getFormat(css.dateLabelFormat()).format(this.date));
+        timeLabel.setText(getFormat(css.timeLabelFormat()).format(Calendar.this.date));
 
         Timer timer = new Timer() {
 
             @Override
             public void run() {
                 Date date = new Date();
-                timeLabel.setText(DateTimeFormat.getFormat("hh:mm:ss a").format(date));
+                timeLabel.setText(getFormat("hh:mm:ss a").format(date));
             }
         };
         timer.scheduleRepeating(1000);

@@ -8,6 +8,12 @@ import com.google.gwt.resources.client.CssResource;
  */
 public interface CalendarCss extends CssResource {
 
+    String monthLabelFormat();
+
+    String timeLabelFormat();
+
+    String dateLabelFormat();
+
     int _width();
 
     int _height();
