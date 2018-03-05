@@ -15,13 +15,13 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
 
 import static com.github.joraclista.client.ui.common.TaskUtil.scheduleRepeating;
 import static com.google.gwt.i18n.client.DateTimeFormat.getFormat;
-import static com.google.gwt.user.datepicker.client.CalendarUtil.*;
 import static java.util.Arrays.asList;
 
 /**
@@ -40,7 +40,7 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
     private Date date;
 
     @UiField
-    Label monthLabel;
+    Label strategyPicker;
     @UiField
     Button upButton;
     @UiField
@@ -50,14 +50,17 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
     @UiField
     Button downButton;
     @UiField
-    FlowPanel daysPanel;
+    FlowPanel selectionPanel;
     @UiField
     FlowPanel header;
     @UiField
     FlowPanel subHeader;
     @UiField
     FlowPanel buttons;
+
     private Timer repeatingTask;
+    private SelectionStrategies strategy = SelectionStrategies.SELECT_DAY_IN_A_MONTH;
+    private Map<SelectionStrategies, CalendarStrategy> renderingStrategiesMap = new HashMap<>();
 
     public Calendar(CalendarCss css) {
         this.css = css;
@@ -74,68 +77,50 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
         this.dateLabel.addStyleName(css.dateLabel());
 
         this.subHeader.addStyleName(css.subHeader());
-        this.monthLabel.addStyleName(css.monthLabel());
+        this.strategyPicker.addStyleName(css.monthLabel());
         this.buttons.addStyleName(css.buttons());
         this.upButton.addStyleName(css.upButton());
         this.downButton.addStyleName(css.downButton());
 
 
-        this.daysPanel.addStyleName(css.daysPanel());
+        this.selectionPanel.addStyleName(css.daysPanel());
 
+        this.dateLabel.setText(getFormat(css.dateLabelFormat()).format(new Date()));
+        updateTimeLabel(new Date());
 
+        if (this.repeatingTask == null) {
+            this.repeatingTask = scheduleRepeating(() -> updateTimeLabel(new Date()), 1000);
+        }
 
-        drawMonthForDate(new Date());
+        asList(SelectionStrategies.values()).forEach(strategy -> {
+            CalendarStrategy calendarStrategy = CalendarStrategy.from(strategy)
+                    .withCss(css);
+            renderingStrategiesMap.put(strategy, calendarStrategy);
+            calendarStrategy.addValueChangeHandler(event -> {
+                date = event.getValue().getDate();
+                setStrategy(event.getValue().getSelectionStrategies());
+            });
+        });
+
+        render(new Date());
     }
 
     private void updateTimeLabel(Date date) {
         timeLabel.setText(getFormat(css.timeLabelFormat()).format(date));
     }
 
-    private void drawMonthForDate(Date start) {
-        this.date = start;
-
-        monthLabel.setText(getFormat(css.monthLabelFormat()).format(this.date));
-        dateLabel.setText(getFormat(css.dateLabelFormat()).format(new Date()));
-        updateTimeLabel(this.date);
-
-        if (this.repeatingTask == null) {
-            this.repeatingTask = scheduleRepeating(() -> updateTimeLabel(new Date()), 1000);
-        }
-
-        this.repeatingTask = scheduleRepeating(() -> updateTimeLabel(new Date()), 1000);
-
-        daysPanel.clear();
-        asList(css.weekDaysShortcut().split(" ")).forEach(day -> daysPanel.add(new Label(day)));
-
-        Date current = copyDate(start);
-        setToFirstDayOfMonth(current);
-        while (current.getDay() != 0) {
-            addDaysToDate(current, -1);
-        }
-
-        List<Date> days = new ArrayList<>();
-        for(int i = 0; i < css.weekDaysShortcut().split(" ").length * css.maxRows(); i++){
-            days.add(copyDate(current));
-            addDaysToDate(current, 1);
-        }
-
-        days.forEach(day -> {
-            Label dayLabel = new Label(day.getDate() + "");
-            dayLabel.setStyleName(css.otherMonthDayLabel(), day.getMonth() != this.date.getMonth());
-            dayLabel.setStyleName(css.selected(), isSameDate(day, new Date()));
-            daysPanel.add(dayLabel);
-        });
-
-    }
-
-
-    public void setSelectedDate(Date date) {
+    private void render(Date date) {
         this.date = date;
-    }
+
+        CalendarStrategy calendarStrategy = renderingStrategiesMap.get(strategy);
+
+        Logger.getLogger("").info("render = " + calendarStrategy.getClass().getName());
+        calendarStrategy.withDate(date);
+        calendarStrategy.drawSelectionPanel(selectionPanel);
+
+        strategyPicker.setText(calendarStrategy.getSubheaderLabel());
 
 
-    public Date getSelectedDate() {
-        return date;
     }
 
     @Override
@@ -145,13 +130,27 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
 
     @UiHandler("upButton")
     void onUpButtonClick(ClickEvent event) {
-        addMonthsToDate(this.date, -1);
-        drawMonthForDate(this.date);
+        CalendarStrategy calendarStrategy = renderingStrategiesMap.get(strategy);
+        calendarStrategy.onUpButtonClick();
+        render(calendarStrategy.getDate());
+
     }
 
     @UiHandler("downButton")
     void onDownButtonClick(ClickEvent event) {
-        addMonthsToDate(this.date, 1);
-        drawMonthForDate(this.date);
+        CalendarStrategy calendarStrategy = renderingStrategiesMap.get(strategy);
+        calendarStrategy.onDownButtonClick();
+        render(calendarStrategy.getDate());
     }
+
+    @UiHandler("strategyPicker")
+    void onMonthLabelClick(ClickEvent event) {
+        setStrategy(this.strategy.next());
+    }
+
+    private void setStrategy(SelectionStrategies strategy) {
+        this.strategy = strategy;
+        render(date);
+    }
+
 }

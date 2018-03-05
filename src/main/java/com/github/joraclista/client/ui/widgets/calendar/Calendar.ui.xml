@@ -8,12 +8,12 @@
             <g:Label  ui:field="dateLabel"/>
         </g:FlowPanel>
         <g:FlowPanel  ui:field="subHeader">
-            <g:Label  ui:field="monthLabel"/>
+            <g:Label  ui:field="strategyPicker"/>
             <g:FlowPanel  ui:field="buttons">
                 <g:Button  ui:field="upButton"/>
                 <g:Button  ui:field="downButton"/>
             </g:FlowPanel>
         </g:FlowPanel>
-        <g:FlowPanel  ui:field="daysPanel" />
+        <g:FlowPanel  ui:field="selectionPanel" />
     </g:FlowPanel>
 </ui:UiBinder>

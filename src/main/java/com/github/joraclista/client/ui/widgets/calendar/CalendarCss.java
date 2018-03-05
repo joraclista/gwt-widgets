@@ -16,6 +16,8 @@ public interface CalendarCss extends CssResource {
 
     String weekDaysShortcut();
 
+    String monthShortcut();
+
     int _width();
 
     int _height();
@@ -45,4 +47,6 @@ public interface CalendarCss extends CssResource {
     String otherMonthDayLabel();
 
     String selected();
+
+    String monthSelectPanel();
 }
