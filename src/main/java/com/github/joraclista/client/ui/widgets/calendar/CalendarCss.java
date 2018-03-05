@@ -1,4 +1,4 @@
-package com.github.joraclista.client.ui;
+package com.github.joraclista.client.ui.widgets.calendar;
 
 import com.google.gwt.resources.client.CssResource;
 

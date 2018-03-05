@@ -45,27 +45,21 @@
 
 .upButton {
     transform: rotate(90deg);
-    background: none;
-    color: white;
-    border: none;
-    font-size: 26px;
-    cursor: pointer;
 }
-
 .downButton {
     transform: rotate(-90deg);
+}
+
+.upButton, .downButton {
     background: none;
     color: white;
     border: none;
     font-size: 26px;
     cursor: pointer;
+    outline:0;
 }
 
-.downButton::after {
-    content: "\276C";
-}
-
-.upButton::after {
+.upButton::after, .downButton::after {
     content: "\276C";
 }
 
