@@ -1,12 +1,15 @@
 package com.github.joraclista.client.ui.widgets.calendar;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -54,6 +57,7 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
     FlowPanel subHeader;
     @UiField
     FlowPanel buttons;
+    private Timer repeatingTask;
 
     public Calendar(CalendarCss css) {
         this.css = css;
@@ -61,7 +65,7 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
 
         initWidget(ourUiBinder.createAndBindUi(this));
 
-        this.date = new Date();
+
 
         this.asWidget().addStyleName(css.main());
 
@@ -78,11 +82,7 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
 
         this.daysPanel.addStyleName(css.daysPanel());
 
-        monthLabel.setText(getFormat(css.monthLabelFormat()).format(this.date));
-        dateLabel.setText(getFormat(css.dateLabelFormat()).format(this.date));
-        updateTimeLabel(this.date);
 
-        scheduleRepeating(() -> updateTimeLabel(new Date()), 1000);
 
         drawMonthForDate(new Date());
     }
@@ -92,13 +92,25 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
     }
 
     private void drawMonthForDate(Date start) {
+        this.date = start;
+
+        monthLabel.setText(getFormat(css.monthLabelFormat()).format(this.date));
+        dateLabel.setText(getFormat(css.dateLabelFormat()).format(new Date()));
+        updateTimeLabel(this.date);
+
+        if (this.repeatingTask == null) {
+            this.repeatingTask = scheduleRepeating(() -> updateTimeLabel(new Date()), 1000);
+        }
+
+        this.repeatingTask = scheduleRepeating(() -> updateTimeLabel(new Date()), 1000);
+
         daysPanel.clear();
         asList(css.weekDaysShortcut().split(" ")).forEach(day -> daysPanel.add(new Label(day)));
 
-        Date current = start;
-        setToFirstDayOfMonth(start);
+        Date current = copyDate(start);
+        setToFirstDayOfMonth(current);
         while (current.getDay() != 0) {
-            addDaysToDate(start, -1);
+            addDaysToDate(current, -1);
         }
 
         List<Date> days = new ArrayList<>();
@@ -110,27 +122,10 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
         days.forEach(day -> {
             Label dayLabel = new Label(day.getDate() + "");
             dayLabel.setStyleName(css.otherMonthDayLabel(), day.getMonth() != this.date.getMonth());
-            dayLabel.setStyleName(css.selected(), isSameDate(day, this.date));
+            dayLabel.setStyleName(css.selected(), isSameDate(day, new Date()));
             daysPanel.add(dayLabel);
         });
-//        upButton.addClickHandler(new ClickHandler() {
-//            @Override
-//            public void onClick(ClickEvent event) {
-//
-//                Date pervious = CalendarUtil.copyDate(start);
-//                CalendarUtil.addMonthsToDate(pervious, -1);
-//                draw(pervious);
-//            }
-//        });
-//        downButton.addClickHandler(new ClickHandler() {
-//            @Override
-//            public void onClick(ClickEvent event) {
-//
-//                Date next = CalendarUtil.copyDate(start);
-//                CalendarUtil.addMonthsToDate(next, +1);
-//                draw(next);
-//            }
-//        });
+
     }
 
 
@@ -148,4 +143,15 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
         return super.addHandler(handler, ValueChangeEvent.getType());
     }
 
+    @UiHandler("upButton")
+    void onUpButtonClick(ClickEvent event) {
+        addMonthsToDate(this.date, -1);
+        drawMonthForDate(this.date);
+    }
+
+    @UiHandler("downButton")
+    void onDownButtonClick(ClickEvent event) {
+        addMonthsToDate(this.date, 1);
+        drawMonthForDate(this.date);
+    }
 }

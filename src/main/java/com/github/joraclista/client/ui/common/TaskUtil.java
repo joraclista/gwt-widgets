@@ -10,7 +10,7 @@ public final class TaskUtil {
 
     private TaskUtil() {}
 
-    public static void schedule(Runnable runnable) {
+    public static Timer schedule(Runnable runnable) {
         Timer timer = new Timer() {
 
             @Override
@@ -19,9 +19,10 @@ public final class TaskUtil {
             }
         };
         timer.run();
+        return timer;
     }
 
-    public static void scheduleWithDelay(Runnable runnable, int delayMs) {
+    public static Timer scheduleWithDelay(Runnable runnable, int delayMs) {
         Timer timer = new Timer() {
 
             @Override
@@ -31,9 +32,10 @@ public final class TaskUtil {
         };
         timer.schedule(delayMs);
         timer.run();
+        return timer;
     }
 
-    public static void scheduleRepeating(Runnable runnable, int repeatPeriod) {
+    public static Timer scheduleRepeating(Runnable runnable, int repeatPeriod) {
         Timer timer = new Timer() {
 
             @Override
@@ -43,5 +45,6 @@ public final class TaskUtil {
         };
         timer.scheduleRepeating(repeatPeriod);
         timer.run();
+        return timer;
     }
 }

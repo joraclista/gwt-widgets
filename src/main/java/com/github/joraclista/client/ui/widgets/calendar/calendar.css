@@ -1,11 +1,11 @@
 @def _width 300;
 @def _height 350;
 
-@def maxRows 7;
+@def maxRows 6;
 
-@def monthLabelFormat MMM yyyy;
+@def monthLabelFormat MMMM yyyy;
 @def dateLabelFormat EEE, MMM d, yyyy;
-@def timeLabelFormat "hh:mm:ss a";
+@def timeLabelFormat literal("hh:mm:ss a");
 @def weekDaysShortcut Su Mo Tu We Th Fr Sa;
 
 .main {
@@ -14,14 +14,13 @@
 
     background: #607D8B;
     color: white;
-    width: 100%;
-    height: 100%;
     flex: 1 1 auto;
     width: _width;
     height: _height;
     font-size: 16px;
     padding: 20px;
     box-sizing: border-box;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
 }
 
 .header {
