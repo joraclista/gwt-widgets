@@ -1,6 +1,6 @@
 package com.github.joraclista.client;
 
-import com.github.joraclista.client.ui.widgets.calendar.CalendarBundle;
+import com.github.joraclista.client.ui.widgets.calendar.css.CalendarBundle;
 import com.github.joraclista.client.ui.widgets.calendar.Calendar;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.IsWidget;

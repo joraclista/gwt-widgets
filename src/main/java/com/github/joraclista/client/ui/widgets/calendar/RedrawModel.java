@@ -1,5 +1,7 @@
 package com.github.joraclista.client.ui.widgets.calendar;
 
+import com.github.joraclista.client.ui.widgets.calendar.strategies.SelectionType;
+
 import java.util.Date;
 
 /**
@@ -8,18 +10,18 @@ import java.util.Date;
  */
 public class RedrawModel {
     private Date date;
-    private SelectionStrategies selectionStrategies;
+    private SelectionType selectionType;
 
-    public RedrawModel(Date date, SelectionStrategies selectionStrategies) {
+    public RedrawModel(Date date, SelectionType selectionType) {
         this.date = date;
-        this.selectionStrategies = selectionStrategies;
+        this.selectionType = selectionType;
     }
 
     public Date getDate() {
         return date;
     }
 
-    public SelectionStrategies getSelectionStrategies() {
-        return selectionStrategies;
+    public SelectionType getSelectionType() {
+        return selectionType;
     }
 }

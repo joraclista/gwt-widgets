@@ -1,5 +1,6 @@
-package com.github.joraclista.client.ui.widgets.calendar;
+package com.github.joraclista.client.ui.widgets.calendar.strategies;
 
+import com.github.joraclista.client.ui.widgets.calendar.RedrawModel;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -53,7 +54,7 @@ class YearStrategy extends CalendarStrategy {
             handlers.put(monthIdx, monthLabel.addClickHandler(event -> {
                 Date newDate = date;
                 date.setMonth(monthIdx);
-                ValueChangeEvent.fire(YearStrategy.this, new RedrawModel(newDate, SelectionStrategies.SELECT_DAY_IN_A_MONTH));
+                ValueChangeEvent.fire(YearStrategy.this, new RedrawModel(newDate, SelectionType.SELECT_DAY_IN_A_MONTH));
             }));
         });
     }

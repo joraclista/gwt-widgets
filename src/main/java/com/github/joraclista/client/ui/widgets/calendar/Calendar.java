@@ -1,5 +1,8 @@
 package com.github.joraclista.client.ui.widgets.calendar;
 
+import com.github.joraclista.client.ui.widgets.calendar.css.CalendarCss;
+import com.github.joraclista.client.ui.widgets.calendar.strategies.CalendarStrategy;
+import com.github.joraclista.client.ui.widgets.calendar.strategies.SelectionType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
@@ -59,8 +62,8 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
     FlowPanel buttons;
 
     private Timer repeatingTask;
-    private SelectionStrategies strategy = SelectionStrategies.SELECT_DAY_IN_A_MONTH;
-    private Map<SelectionStrategies, CalendarStrategy> renderingStrategiesMap = new HashMap<>();
+    private SelectionType strategy = SelectionType.SELECT_DAY_IN_A_MONTH;
+    private Map<SelectionType, CalendarStrategy> renderingStrategiesMap = new HashMap<>();
 
     public Calendar(CalendarCss css) {
         this.css = css;
@@ -92,7 +95,7 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
             this.repeatingTask = scheduleRepeating(() -> updateTimeLabel(new Date()), 1000);
         }
 
-        asList(SelectionStrategies.values()).forEach(strategy -> {
+        asList(SelectionType.values()).forEach(strategy -> {
             CalendarStrategy calendarStrategy = CalendarStrategy.from(strategy)
                     .withCss(css);
             renderingStrategiesMap.put(strategy, calendarStrategy);
@@ -145,10 +148,10 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
 
     @UiHandler("strategyPicker")
     void onMonthLabelClick(ClickEvent event) {
-        setStrategy(this.strategy.next());
+        setStrategy(this.strategy.up());
     }
 
-    private void setStrategy(SelectionStrategies strategy) {
+    private void setStrategy(SelectionType strategy) {
         this.strategy = strategy;
         render(date);
     }

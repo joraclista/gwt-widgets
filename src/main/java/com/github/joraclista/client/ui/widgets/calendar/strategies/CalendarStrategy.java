@@ -1,5 +1,8 @@
-package com.github.joraclista.client.ui.widgets.calendar;
+package com.github.joraclista.client.ui.widgets.calendar.strategies;
 
+import com.github.joraclista.client.ui.widgets.calendar.RedrawModel;
+import com.github.joraclista.client.ui.widgets.calendar.css.CalendarBundle;
+import com.github.joraclista.client.ui.widgets.calendar.css.CalendarCss;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -29,15 +32,15 @@ public abstract class CalendarStrategy implements HasValueChangeHandlers<RedrawM
         return this;
     }
 
-    protected abstract void  onUpButtonClick();
+    public abstract void  onUpButtonClick();
 
-    protected abstract void onDownButtonClick();
+    public abstract void onDownButtonClick();
 
-    protected abstract String getSubheaderLabel();
+    public abstract String getSubheaderLabel();
 
-    abstract void drawSelectionPanel(FlowPanel selectionPanel);
+    public abstract void drawSelectionPanel(FlowPanel selectionPanel);
 
-    static CalendarStrategy from(SelectionStrategies selectionStrategies) {
+    public static CalendarStrategy from(SelectionType selectionStrategies) {
         switch (selectionStrategies) {
             case SELECT_DAY_IN_A_MONTH: return new MonthStrategy();
             case SELECT_YEAR: return new YearStrategy();
