@@ -14,6 +14,8 @@ public interface CalendarCss extends CssResource {
 
     String dateLabelFormat();
 
+    String yearLabelFormat();
+
     String weekDaysShortcut();
 
     String monthShortcut();

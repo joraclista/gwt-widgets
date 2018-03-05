@@ -4,6 +4,7 @@
 @def maxRows 6;
 
 @def monthLabelFormat MMMM yyyy;
+@def yearLabelFormat yyyy;
 @def dateLabelFormat EEE, MMM d, yyyy;
 @def timeLabelFormat literal("hh:mm:ss a");
 @def weekDaysShortcut Su Mo Tu We Th Fr Sa;
