@@ -1,0 +1,19 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    
+
+    <g:FlowPanel >
+        <g:FlowPanel  ui:field="header">
+            <g:Label  ui:field="timeLabel"/>
+            <g:Label  ui:field="dateLabel"/>
+        </g:FlowPanel>
+        <g:FlowPanel  ui:field="subHeader">
+            <g:Label  ui:field="monthLabel"/>
+            <g:FlowPanel  ui:field="buttons">
+                <g:Button  ui:field="upButton"/>
+                <g:Button  ui:field="downButton"/>
+            </g:FlowPanel>
+        </g:FlowPanel>
+        <g:FlowPanel  ui:field="daysPanel" />
+    </g:FlowPanel>
+</ui:UiBinder>

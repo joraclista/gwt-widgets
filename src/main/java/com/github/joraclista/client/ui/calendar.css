@@ -1,0 +1,96 @@
+@def _width 300;
+@def _height 350;
+
+.main {
+    display: flex;
+    flex-direction: column;
+
+    background: #607D8B;
+    color: white;
+    width: 100%;
+    height: 100%;
+    flex: 1 1 auto;
+    width: _width;
+    height: _height;
+    font-size: 16px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+}
+
+.subHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+.monthLabel {
+
+}
+
+.upButton {
+    transform: rotate(90deg);
+    background: none;
+    color: white;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.downButton {
+    transform: rotate(-90deg);
+    background: none;
+    color: white;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.downButton::after {
+    content: "\276C";
+}
+
+.upButton::after {
+    content: "\276C";
+}
+
+.timeLabel {
+    font-size: 40px;
+}
+
+.dateLabel {
+    color: #00BCD4;
+}
+
+.daysPanel {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+}
+.daysPanel div {
+    padding: 3px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.otherMonthDayLabel {
+    opacity: 0.5;
+}
+
+.selected {
+    background: #00BCD4;
+}
