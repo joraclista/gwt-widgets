@@ -1,5 +1,6 @@
 package com.github.joraclista.client.ui.widgets.calendar.strategies;
 
+import com.github.joraclista.client.ui.widgets.calendar.DaysName;
 import com.github.joraclista.client.ui.widgets.calendar.RenderModel;
 import com.github.joraclista.client.ui.widgets.calendar.css.CalendarBundle;
 import com.github.joraclista.client.ui.widgets.calendar.css.CalendarCss;
@@ -12,6 +13,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by Alisa
@@ -22,6 +24,8 @@ public abstract class CalendarStrategy implements HasValueChangeHandlers<RenderM
     protected CalendarCss css = CalendarBundle.BUNDLE.calendarCss();
     protected Date date;
     private HandlerManager handlerManager;
+    protected DaysName startOfWeek;
+    protected Map<DaysName, String> dayNamesHeadersMap;
 
     public CalendarStrategy withCss(CalendarCss css) {
         this.css = css;
@@ -29,6 +33,18 @@ public abstract class CalendarStrategy implements HasValueChangeHandlers<RenderM
     }
     public CalendarStrategy withDate(Date date) {
         this.date = date;
+        return this;
+    }
+    public CalendarStrategy withStartOfWeek(DaysName startOfWeek) {
+        this.startOfWeek = startOfWeek;
+        return this;
+    }
+
+    public CalendarStrategy withDayNamesHeadersMap(Map<DaysName, String> dayNamesHeadersMap) {
+        if (dayNamesHeadersMap == null || dayNamesHeadersMap.size() != DaysName.values().length) {
+            throw new IllegalArgumentException("Days Names Header Map should have all possible day names");
+        }
+        this.dayNamesHeadersMap = dayNamesHeadersMap;
         return this;
     }
 

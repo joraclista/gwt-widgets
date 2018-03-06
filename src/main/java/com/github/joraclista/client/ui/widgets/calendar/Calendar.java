@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 import static com.github.joraclista.client.ui.common.TaskUtil.scheduleRepeating;
 import static com.google.gwt.i18n.client.DateTimeFormat.getFormat;
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toMap;
 
 /**
  * Created by Alisa
@@ -64,6 +65,8 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
     private Timer repeatingTask;
     private SelectionType strategy = SelectionType.SELECT_DAY_IN_A_MONTH;
     private Map<SelectionType, CalendarStrategy> renderingStrategiesMap = new HashMap<>();
+    private DaysName startOfWeek;
+    private Map<DaysName, String> dayNamesHeadersMap;
 
     public Calendar(CalendarCss css) {
         this.css = css;
@@ -105,6 +108,11 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
             });
         });
 
+        this.startOfWeek = DaysName.MO;
+        this.dayNamesHeadersMap = asList(DaysName.values())
+                .stream()
+                .collect(toMap(dayName -> dayName, dayName -> dayName.getHeaderName(), (d1, d2) -> d1));
+
         render(new Date());
     }
 
@@ -118,7 +126,7 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
         CalendarStrategy calendarStrategy = renderingStrategiesMap.get(strategy);
 
         Logger.getLogger("").info("render = " + calendarStrategy.getClass().getName());
-        calendarStrategy.withDate(date);
+        calendarStrategy.withDate(date).withDayNamesHeadersMap(dayNamesHeadersMap).withStartOfWeek(startOfWeek);
         calendarStrategy.drawSelectionPanel(selectionPanel);
 
         strategyPicker.setText(calendarStrategy.getSubheaderLabel());
@@ -156,4 +164,17 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
         render(date);
     }
 
+
+    public Calendar withStartOfWeek(DaysName startOfWeek) {
+        this.startOfWeek = startOfWeek;
+        return this;
+    }
+
+    public Calendar withDayNamesHeadersMap(Map<DaysName, String> dayNamesHeadersMap) {
+        if (dayNamesHeadersMap == null || dayNamesHeadersMap.size() != DaysName.values().length) {
+            throw new IllegalArgumentException("Days Names Header Map should have all possible day names");
+        }
+        this.dayNamesHeadersMap = dayNamesHeadersMap;
+        return this;
+    }
 }

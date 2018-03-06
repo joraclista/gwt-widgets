@@ -7,7 +7,6 @@
 @def yearLabelFormat yyyy;
 @def dateLabelFormat EEE, MMM d, yyyy;
 @def timeLabelFormat literal("hh:mm:ss a");
-@def weekDaysShortcut Su Mo Tu We Th Fr Sa;
 @def monthShortcut Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec;
 
 .main {
