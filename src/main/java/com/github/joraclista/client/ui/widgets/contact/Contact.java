@@ -4,10 +4,7 @@ import com.github.joraclista.client.ui.widgets.contact.css.ContactCss;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.*;
 
 /**
  * Created by Alisa
@@ -63,15 +60,40 @@ public class Contact extends Composite {
     }
 
     public void addContactInfo(String contactInfo, ContactType type) {
-        Label info = new Label(contactInfo);
+        Widget info = ContactType.EMAIL.equals(type) || ContactType.WEBSITE.equals(type) ? new Anchor(contactInfo) : new Label(contactInfo);
         Label infoType = new Label(type.getType());
         FlowPanel panel = new FlowPanel();
         infoType.addStyleName(css.infoType());
         info.addStyleName(css.info());
-        panel.addStyleName(css.email());
+        switch (type) {
+            case EMAIL:
+                panel.addStyleName(css.email());
+                break;
+            case FACEBOOK:
+                panel.addStyleName(css.fb());
+                break;
+            case SKYPE:
+                panel.addStyleName(css.skype());
+                break;
+            case PHONE:
+                panel.addStyleName(css.telephone());
+                break;
+            case WEBSITE:
+                panel.addStyleName(css.website());
+                break;
+           default:
+                panel.addStyleName(css.note());
+                break;
+        }
         panel.addStyleName(css.contactInfo());
         contactInfoPanel.add(panel);
         panel.add(info);
+        if (ContactType.EMAIL.equals(type))
+            ((Anchor)info).setHref("mailto:" + contactInfo);
+        if (ContactType.WEBSITE.equals(type)) {
+            ((Anchor)info).setHref(contactInfo);
+            ((Anchor)info).setTarget("_blank");
+        }
         panel.add(infoType);
     }
 

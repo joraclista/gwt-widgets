@@ -39,4 +39,12 @@ public interface ContactCss extends CssResource {
     String email();
 
     String contactInfoPanel();
+
+    String note();
+
+    String website();
+
+    String skype();
+
+    String fb();
 }

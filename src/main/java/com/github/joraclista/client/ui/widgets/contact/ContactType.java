@@ -5,7 +5,7 @@ package com.github.joraclista.client.ui.widgets.contact;
  * version 1.0.
  */
 public enum ContactType {
-    MOBILE("Mobile"), PHONE("Phone"), EMAIL("Email"), WEBSITE("Website");
+    MOBILE("Mobile"), PHONE("Phone"), EMAIL("Email"), WEBSITE("Website"), FACEBOOK("Facebook"), SKYPE("Skype"), NOTE("Other");
 
     private String type;
 

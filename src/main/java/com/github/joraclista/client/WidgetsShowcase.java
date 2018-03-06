@@ -33,6 +33,8 @@ public class WidgetsShowcase implements EntryPoint {
         contact.setProfession("Web Developer");
         contact.addContactInfo("+38(069)609-90-99", ContactType.MOBILE);
         contact.addContactInfo("someone@example.com", ContactType.EMAIL);
+        contact.addContactInfo("example.com", ContactType.WEBSITE);
+        //contact.addContactInfo("www.fb.com/someone.id", ContactType.FACEBOOK);
         contact.setImageUrl("https://media.gettyimages.com/photos/man-with-a-mustache-picture-id516040293");
         addToRoot(contact);
     }

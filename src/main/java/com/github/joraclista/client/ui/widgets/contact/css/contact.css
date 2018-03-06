@@ -30,6 +30,7 @@
 
 .contactInfo {
     padding-left: 25px;
+    margin: 5px 0;
 }
 
 .profession {
@@ -82,25 +83,47 @@
     box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
 }
 
+.note::before,
+.skype::before,
+.fb::before,
+.website::before,
+.telephone::before,
 .email::before {
-    content: "\2709";
     position: absolute;
-    left: -10px;
-    color: #00BCD4;
+    left: 0;
+    color: #00bcd4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10px;
+    height: 10px;
+}
+.note::before {
+    content: "\f249";
+    font-family: 'Font Awesome 5 Regular';
+}
+
+.skype::before {
+    content: "\f17e";
+    font-family: 'Font Awesome 5 Brands';
+}
+.fb::before {
+    content: "\f39e";;
+    font-family: 'Font Awesome 5 Brands';
+}
+.website::before {
+    content: "\f0ac";
+    font-family: 'Font Awesome 5 Solid';
 }
 
 .telephone::before {
-    content: "\260E";
-    position: absolute;
-    left: -10px;
-    color: #00BCD4;
+    content: "\f095";
+    font-family: 'Font Awesome 5 Regular';
 }
 
 .email::before {
-    content: "\2709";
-    position: absolute;
-    left: 0px;
-    color: #00BCD4;
+    content: "\f0e0";
+    font-family: 'Font Awesome 5 Regular';
 }
 
 .contactInfoPanel{
@@ -112,4 +135,9 @@
     display: flex;
     flex-direction: column;
     position: relative;
+}
+
+.contactInfo a {
+    color: #2196F3;
+    text-decoration: none;
 }
