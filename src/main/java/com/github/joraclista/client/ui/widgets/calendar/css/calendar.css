@@ -47,7 +47,7 @@
     justify-content: start;
 }
 .monthLabel {
-
+  cursor: pointer;
 }
 
 .upButton {
@@ -76,6 +76,7 @@
 
 .dateLabel {
     color: #00BCD4;
+    cursor: pointer;
 }
 
 .daysPanel {
@@ -86,6 +87,7 @@
     padding: 3px;
     box-sizing: border-box;
     text-align: center;
+    cursor: pointer;
 }
 
 .otherMonthDayLabel {
@@ -105,6 +107,7 @@
     padding: 15px;
     box-sizing: border-box;
     text-align: center;
+    cursor: pointer;
 }
 
 .yearSelectPanel div {
@@ -112,4 +115,5 @@
     font-size: 13px;
     box-sizing: border-box;
     text-align: center;
+    cursor: pointer;
 }

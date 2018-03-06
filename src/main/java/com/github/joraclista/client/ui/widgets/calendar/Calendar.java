@@ -158,12 +158,20 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
         setStrategy(this.strategy.up());
     }
 
+    @UiHandler("dateLabel")
+    void onCurrentDateLabelClick(ClickEvent event) {
+        setStrategy(SelectionType.SELECT_DAY_IN_A_MONTH, new Date());
+    }
+
     private void setStrategy(SelectionType strategy) {
         this.strategy = strategy;
         render(date);
     }
 
-
+    private void setStrategy(SelectionType strategy, Date date) {
+        this.strategy = strategy;
+        render(date);
+    }
     public Calendar withStartOfWeek(DaysName startOfWeek) {
         this.startOfWeek = startOfWeek;
         return this;
