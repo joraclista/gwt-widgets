@@ -21,7 +21,6 @@ import com.google.gwt.user.client.ui.Label;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import static com.github.joraclista.client.ui.common.TaskUtil.scheduleRepeating;
 import static com.google.gwt.i18n.client.DateTimeFormat.getFormat;
@@ -108,7 +107,7 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
             });
         });
 
-        this.startOfWeek = DaysName.MO;
+        this.startOfWeek = DaysName.SU;
         this.dayNamesHeadersMap = asList(DaysName.values())
                 .stream()
                 .collect(toMap(dayName -> dayName, dayName -> dayName.getHeaderName(), (d1, d2) -> d1));
@@ -123,10 +122,10 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
     private void render(Date date) {
         this.date = date;
 
-        CalendarStrategy calendarStrategy = renderingStrategiesMap.get(strategy);
-
-        Logger.getLogger("").info("render = " + calendarStrategy.getClass().getName());
-        calendarStrategy.withDate(date).withDayNamesHeadersMap(dayNamesHeadersMap).withStartOfWeek(startOfWeek);
+        CalendarStrategy calendarStrategy = renderingStrategiesMap.get(strategy)
+                .withDate(date)
+                .withDayNamesHeadersMap(dayNamesHeadersMap)
+                .withStartOfWeek(startOfWeek);
         calendarStrategy.drawSelectionPanel(selectionPanel);
 
         strategyPicker.setText(calendarStrategy.getSubheaderLabel());

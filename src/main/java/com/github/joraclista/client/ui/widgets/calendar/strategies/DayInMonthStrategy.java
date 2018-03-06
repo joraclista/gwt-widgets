@@ -2,13 +2,11 @@ package com.github.joraclista.client.ui.widgets.calendar.strategies;
 
 import com.github.joraclista.client.ui.widgets.calendar.DaysName;
 import com.github.joraclista.client.ui.widgets.calendar.RenderModel;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import static com.github.joraclista.client.ui.widgets.calendar.DaysName.values;
@@ -22,8 +20,6 @@ import static java.util.stream.Collectors.toList;
  * version 1.0.
  */
 class DayInMonthStrategy extends CalendarStrategy {
-
-    private List<HandlerRegistration> handlers = new LinkedList<>();
 
     @Override
     public void onUpButtonClick() {
@@ -44,8 +40,7 @@ class DayInMonthStrategy extends CalendarStrategy {
     public void drawSelectionPanel(FlowPanel selectionPanel) {
         Date start = date;
         selectionPanel.clear();
-        handlers.forEach(handler -> handler.removeHandler());
-        handlers.clear();
+        clearHandlers();
 
         selectionPanel.setStyleName(css.daysPanel(), true);
         selectionPanel.setStyleName(css.monthSelectPanel(), false);
@@ -75,6 +70,7 @@ class DayInMonthStrategy extends CalendarStrategy {
             handlers.add(dayLabel.addClickHandler(event -> new RenderModel(day, getSelectionType().down())));
         });
     }
+
 
     private void drawHeaders(FlowPanel selectionPanel) {
         asList(values())

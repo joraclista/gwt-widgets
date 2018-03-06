@@ -13,6 +13,8 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,7 +22,7 @@ import java.util.Map;
  * version 1.0.
  */
 public abstract class CalendarStrategy implements HasValueChangeHandlers<RenderModel> {
-
+    protected List<HandlerRegistration> handlers = new LinkedList<>();
     protected CalendarCss css = CalendarBundle.BUNDLE.calendarCss();
     protected Date date;
     private HandlerManager handlerManager;
@@ -95,4 +97,10 @@ public abstract class CalendarStrategy implements HasValueChangeHandlers<RenderM
     }
 
     protected abstract SelectionType getSelectionType();
+
+
+    protected void clearHandlers() {
+        handlers.forEach(handler -> handler.removeHandler());
+        handlers.clear();
+    }
 }

@@ -1,13 +1,10 @@
 package com.github.joraclista.client.ui.widgets.calendar.strategies;
 
 import com.github.joraclista.client.ui.widgets.calendar.RenderModel;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 import static com.google.gwt.event.logical.shared.ValueChangeEvent.fire;
 import static com.google.gwt.i18n.client.DateTimeFormat.getFormat;
@@ -20,20 +17,19 @@ import static java.util.stream.IntStream.range;
  * version 1.0.
  */
 class YearInYearsStrategy extends CalendarStrategy {
-    private static final int DEFAULT_OFFSET = 10;
 
-    private int offset = DEFAULT_OFFSET;
 
-    private List<HandlerRegistration> handlers = new LinkedList<>();
+    private int leftOffset = 10;
+    private int rightOffset = 0;
 
     @Override
     public void onUpButtonClick() {
-        addMonthsToDate(date, -12 * offset);
+        addMonthsToDate(date, -12 * 10);
     }
 
     @Override
     public void onDownButtonClick() {
-        addMonthsToDate(date, 12 * offset);
+       addMonthsToDate(date, 12 * 10);
     }
 
     @Override
@@ -45,15 +41,15 @@ class YearInYearsStrategy extends CalendarStrategy {
     public void drawSelectionPanel(FlowPanel selectionPanel) {
         selectionPanel.clear();
 
-        handlers.forEach(handler -> handler.removeHandler());
-        handlers.clear();
+        clearHandlers();
 
         selectionPanel.setStyleName(css.daysPanel(), false);
         selectionPanel.setStyleName(css.monthSelectPanel(), false);
         selectionPanel.setStyleName(css.yearSelectPanel(), true);
 
+        int decOffset = this.date.getYear() % 10;
 
-        range(-offset, offset).forEach(_offset -> {
+        range(-leftOffset - decOffset, (10 - decOffset) + rightOffset).forEach(_offset -> {
             Date _date = copyDate(date);
             addMonthsToDate(_date, _offset * 12);
             Label label = new Label(getFormat(css.yearLabelFormat()).format(_date));
@@ -66,20 +62,17 @@ class YearInYearsStrategy extends CalendarStrategy {
     }
 
     private Date getStartDate() {
+        int decOffset = this.date.getYear() % 10;
         Date _date = copyDate(this.date);
-        addMonthsToDate(_date, -12 * offset);
+        addMonthsToDate(_date, -12 * (decOffset + leftOffset));
         return _date;
     }
 
     private Date getEndDate() {
+        int decOffset = this.date.getYear() % 10;
         Date _date = copyDate(this.date);
-        addMonthsToDate(_date, 12 * offset);
+        addMonthsToDate(_date, 12 * ((10 - decOffset) + rightOffset - 1));
         return _date;
-    }
-
-    public YearInYearsStrategy withOffset(int offset) {
-        this.offset = offset;
-        return this;
     }
 
 
