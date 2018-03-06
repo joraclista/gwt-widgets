@@ -9,10 +9,7 @@
                 <g:Label ui:field="profession"/>
                 <g:Label ui:field="addInfo"/>
             </g:FlowPanel>
-            <g:FlowPanel ui:field="contactInfo">
-                <g:Label ui:field="info"/>
-                <g:Label ui:field="infoType"/>
-            </g:FlowPanel>
+            <g:FlowPanel ui:field="contactInfoPanel"/>
         </g:FlowPanel>
     </g:FlowPanel>
 </ui:UiBinder>

@@ -33,4 +33,10 @@ public interface ContactCss extends CssResource {
     String img();
 
     String container();
+
+    String telephone();
+
+    String email();
+
+    String contactInfoPanel();
 }

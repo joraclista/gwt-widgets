@@ -29,7 +29,7 @@
 }
 
 .contactInfo {
-
+    padding-left: 25px;
 }
 
 .profession {
@@ -80,4 +80,36 @@
     font-size: 16px;
     box-sizing: border-box;
     box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+}
+
+.email::before {
+    content: "\2709";
+    position: absolute;
+    left: -10px;
+    color: #00BCD4;
+}
+
+.telephone::before {
+    content: "\260E";
+    position: absolute;
+    left: -10px;
+    color: #00BCD4;
+}
+
+.email::before {
+    content: "\2709";
+    position: absolute;
+    left: 0px;
+    color: #00BCD4;
+}
+
+.contactInfoPanel{
+    display: flex;
+    flex-direction: column;
+}
+
+.contactInfoPanel > div {
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }

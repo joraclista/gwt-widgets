@@ -31,16 +31,13 @@ public class Contact extends Composite {
     Label name;
     @UiField
     Label profession;
-    @UiField
-    FlowPanel contactInfo;
-    @UiField
-    Label infoType;
-    @UiField
-    Label info;
+
     @UiField
     Label addInfo;
     @UiField
     FlowPanel main;
+    @UiField
+    FlowPanel contactInfoPanel;
 
 
     public Contact(ContactCss css) {
@@ -52,9 +49,7 @@ public class Contact extends Composite {
         this.header.addStyleName(css.header());
         this.name.addStyleName(css.name());
         this.profession.addStyleName(css.profession());
-        this.contactInfo.addStyleName(css.contactInfo());
-        this.infoType.addStyleName(css.infoType());
-        this.info.addStyleName(css.info());
+        this.contactInfoPanel.addStyleName(css.contactInfoPanel());
         this.addInfo.addStyleName(css.addInfo());
         this.image.addStyleName(css.img());
     }
@@ -67,8 +62,17 @@ public class Contact extends Composite {
         this.profession.setText(profession);
     }
 
-    public void addContactInfo(String contactInfo) {
-        this.info.setText(contactInfo);
+    public void addContactInfo(String contactInfo, ContactType type) {
+        Label info = new Label(contactInfo);
+        Label infoType = new Label(type.getType());
+        FlowPanel panel = new FlowPanel();
+        infoType.addStyleName(css.infoType());
+        info.addStyleName(css.info());
+        panel.addStyleName(css.email());
+        panel.addStyleName(css.contactInfo());
+        contactInfoPanel.add(panel);
+        panel.add(info);
+        panel.add(infoType);
     }
 
     public void setImageUrl(String url) {
