@@ -1,0 +1,18 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:FlowPanel>
+
+        <g:Image ui:field="image"/>
+        <g:FlowPanel ui:field="main">
+            <g:FlowPanel ui:field="header">
+                <g:Label ui:field="name"/>
+                <g:Label ui:field="profession"/>
+                <g:Label ui:field="addInfo"/>
+            </g:FlowPanel>
+            <g:FlowPanel ui:field="contactInfo">
+                <g:Label ui:field="info"/>
+                <g:Label ui:field="infoType"/>
+            </g:FlowPanel>
+        </g:FlowPanel>
+    </g:FlowPanel>
+</ui:UiBinder>

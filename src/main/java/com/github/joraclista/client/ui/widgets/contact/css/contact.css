@@ -1,0 +1,83 @@
+@def _width 300;
+@def _height 350;
+
+@def maxRows 6;
+
+.main {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+
+}
+
+.info {
+
+}
+
+.infoType {
+    color: #607D8B;
+    font-size: 12px;
+}
+
+.contactInfo {
+
+}
+
+.profession {
+    color: #607D8B;
+}
+
+.name {
+    font-size: 30px;
+
+}
+
+.addInfo {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background: #00BCD4;
+    position: absolute;
+    right: 10px;
+    top: -20px;
+}
+
+.addInfo::after {
+    content: "+";
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
+
+.img {
+    width: 100%;
+    object-fit: cover;
+    height: 150px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+
+    background: white;
+    color: black;
+    flex: 1 1 auto;
+    width: _width;
+    height: _height;
+    font-size: 16px;
+    box-sizing: border-box;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+}

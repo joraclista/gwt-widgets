@@ -2,6 +2,8 @@ package com.github.joraclista.client;
 
 import com.github.joraclista.client.ui.widgets.calendar.css.CalendarBundle;
 import com.github.joraclista.client.ui.widgets.calendar.Calendar;
+import com.github.joraclista.client.ui.widgets.contact.Contact;
+import com.github.joraclista.client.ui.widgets.contact.css.ContactBundle;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -25,7 +27,12 @@ public class WidgetsShowcase implements EntryPoint {
     private void createUI() {
 
         addToRoot(new Calendar(CalendarBundle.BUNDLE.calendarCss()));
-
+        Contact contact = new Contact(ContactBundle.BUNDLE.contactCss());
+        contact.setName("Ryan Brown");
+        contact.setProfession("Web Developer");
+        contact.addContactInfo("+38(069)609-90-99");
+        contact.setImageUrl("https://media.gettyimages.com/photos/man-with-a-mustache-picture-id516040293");
+        addToRoot(contact);
     }
 
     private void addToRoot(IsWidget widget) {
