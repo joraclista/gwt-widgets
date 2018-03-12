@@ -6,6 +6,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
+    position: relative;
 }
 
 .message {
@@ -17,49 +18,127 @@
     align-items: center;
 }
 
-.info-circle::before {
+.info-circle .message::before {
     content: "\f05a";
     font-family: 'Font Awesome 5 Solid';
 }
 
-.info::before {
-    content: "\f129";
+.info .message::before,
+.exclamation-circle .message::before,
+.exclamation .message::before,
+.exclamation-circle .message::before,
+.exclamation .message::before ,
+.check .message:before,
+.check-circle .message:before {
     font-family: 'Font Awesome 5 Solid';
     padding-right: 15px;
     line-height: 10px;
     font-size: 15px;
 }
 
-.exclamation-circle::before {
+.info .message::before {
+    content: "\f129";
+
+}
+
+.exclamation-circle .message::before {
      content: "\f06a";
-     font-family: 'Font Awesome 5 Solid';
  }
 
-.exclamation::before {
+.exclamation .message::before {
     content: "\f12a";
-    font-family: 'Font Awesome 5 Solid';
 }
 
-.exclamation-circle::before {
+.exclamation-circle .message::before {
     content: "\f06a";
-    font-family: 'Font Awesome 5 Solid';
 }
 
-.exclamation::before {
+.exclamation .message::before {
     content: "\f12a";
-    font-family: 'Font Awesome 5 Solid';
 }
 
-.check:before {
+.check .message:before {
     content: "\f00c";
-    font-family: 'Font Awesome 5 Solid';
 }
 
-.check-circle:before {
+.check-circle .message:before {
     content: "\f058";
-    font-family: 'Font Awesome 5 Solid';
 }
 
-.vanilla {
+.vanilla  .message {
 
+}
+.info-circle {
+}
+
+.info {
+}
+
+.exclamation-circle {
+}
+
+.exclamation {
+}
+
+.exclamation-circle {
+}
+
+.exclamation  {
+}
+
+.check {
+}
+
+.check-circle {
+}
+
+.vanilla  {
+
+}
+
+.error, .error .arrow {
+    background: #ff5722;
+}
+
+.warning, .warning  .arrow {
+    background: #ff9800;
+}
+.success, .success  .arrow {
+    background: #009688;
+}
+
+.info, .info  .arrow {
+    background: #607D8B;
+}
+
+.vanilla, .vanilla  .arrow {
+    background: #607D8B;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    transform: rotate(45deg);
+}
+
+.arrow-top {
+    top: calc(-10px);
+}
+.arrow-bottom {
+    bottom: calc(-10px);
+}
+
+.arrow-left {
+    left: calc(-10px);
+    top: literal("calc(50% - 10px)");
+}
+
+.arrow-right {
+    right: calc(-10px);
+    top: literal("calc(50% - 10px)");
+}
+
+.arrow-none {
+    display: none;
 }

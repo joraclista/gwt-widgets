@@ -2,41 +2,45 @@ package com.github.joraclista.client.ui.widgets.notification;
 
 import com.github.joraclista.client.ui.widgets.notification.css.NotificationCss;
 
+import java.util.List;
+
+import static java.util.Arrays.asList;
+
 /**
  * Created by Alisa
  * version 1.0.
  */
 public enum  NotificationType {
-    OK {
+    SUCCESS {
         @Override
-        String style(NotificationCss css) {
-            return css.check();
+        List<String> style(NotificationCss css) {
+            return asList(css.check(), css.success());
         }
     },
     INFO {
         @Override
-        String style(NotificationCss css) {
-            return css.info();
+        List<String> style(NotificationCss css) {
+            return asList(css.info());
         }
     },
     WARNING {
         @Override
-        String style(NotificationCss css) {
-            return css.exclamation();
+        List<String> style(NotificationCss css) {
+            return asList(css.exclamation(), css.warning());
         }
     },
     ERROR {
         @Override
-        String style(NotificationCss css) {
-            return css.exclamation();
+        List<String> style(NotificationCss css) {
+            return asList(css.exclamation(), css.error());
         }
     },
     NONE {
         @Override
-        String style(NotificationCss css) {
-            return css.vanilla();
+        List<String> style(NotificationCss css) {
+            return asList(css.vanilla());
         }
     };
 
-    abstract String style(NotificationCss css);
+    abstract List<String> style(NotificationCss css);
 }

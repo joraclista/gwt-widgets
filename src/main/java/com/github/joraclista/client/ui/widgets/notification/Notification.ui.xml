@@ -2,5 +2,6 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
     <g:FlowPanel>
         <g:Label ui:field="message"/>
+        <g:Label ui:field="arrow"/>
     </g:FlowPanel>
 </ui:UiBinder>

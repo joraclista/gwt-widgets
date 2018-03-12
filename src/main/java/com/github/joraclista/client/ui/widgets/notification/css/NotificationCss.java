@@ -29,4 +29,27 @@ public interface NotificationCss extends CssResource {
     String info();
 
     String vanilla();
+
+    String success();
+
+    String warning();
+
+    String error();
+
+    String arrow();
+
+    @ClassName("arrow-top")
+    String arrowTop();
+
+    @ClassName("arrow-left")
+    String arrowLeft();
+
+    @ClassName("arrow-bottom")
+    String arrowBottom();
+
+    @ClassName("arrow-right")
+    String arrowRight();
+
+    @ClassName("arrow-none")
+    String arrowNone();
 }

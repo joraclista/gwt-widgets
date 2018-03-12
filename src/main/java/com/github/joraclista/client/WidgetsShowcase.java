@@ -1,18 +1,22 @@
 package com.github.joraclista.client;
 
 import com.github.joraclista.client.ui.widgets.WidgetsGroup;
-import com.github.joraclista.client.ui.widgets.calendar.css.CalendarBundle;
 import com.github.joraclista.client.ui.widgets.calendar.Calendar;
+import com.github.joraclista.client.ui.widgets.calendar.css.CalendarBundle;
 import com.github.joraclista.client.ui.widgets.contact.Contact;
 import com.github.joraclista.client.ui.widgets.contact.ContactType;
 import com.github.joraclista.client.ui.widgets.contact.CvContact;
 import com.github.joraclista.client.ui.widgets.contact.Person;
 import com.github.joraclista.client.ui.widgets.contact.css.ContactBundle;
+import com.github.joraclista.client.ui.widgets.notification.ArrowPosition;
+import com.github.joraclista.client.ui.widgets.notification.Notification;
+import com.github.joraclista.client.ui.widgets.notification.NotificationType;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import java.util.Arrays;
+import static java.util.Arrays.asList;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>
@@ -31,7 +35,11 @@ public class WidgetsShowcase implements EntryPoint {
     }
 
     private void createUI() {
-        addToRoot(new WidgetsGroup("Calendars", Arrays.asList(new Calendar(CalendarBundle.BUNDLE.calendarCss()))));
+        Calendar calendar = new Calendar(CalendarBundle.BUNDLE.calendarCss());
+        calendar.addValueChangeHandler(event -> Window.alert(event.getValue().toString()));
+
+
+        addToRoot(new WidgetsGroup("Calendars", asList(calendar)));
 
         Contact contact = new Contact(ContactBundle.BUNDLE.contactCss());
         contact.setName("Ryan Brown");
@@ -50,11 +58,27 @@ public class WidgetsShowcase implements EntryPoint {
                 setPosition("UI Developer / Web Developer");
                 setNumOfClients(10);
                 setNumOfProjects(23);
-                setSkills(Arrays.asList("3+ years of experience", "Professional performance", "Fast support"));
+                setSkills(asList("3+ years of experience", "Professional performance", "Fast support"));
                 setImageUrl("https://media.gettyimages.com/photos/man-with-a-mustache-picture-id516040293");
             }
         });
-        addToRoot(new WidgetsGroup("Business Cards", Arrays.asList(contact, cv)));
+        addToRoot(new WidgetsGroup("Business Cards", asList(contact, cv)));
+
+        addToRoot(new WidgetsGroup("Notifications", asList(
+                new Notification("This is warning")
+                        .withType(NotificationType.WARNING)
+                        .withArrowPosition(ArrowPosition.TOP),
+                new Notification("This is error")
+                        .withType(NotificationType.ERROR)
+                        .withArrowPosition(ArrowPosition.BOTTOM),
+                new Notification("This is info")
+                        .withType(NotificationType.INFO)
+                        .withArrowPosition(ArrowPosition.NONE),
+                new Notification("This is success")
+                        .withType(NotificationType.SUCCESS)
+                        .withArrowPosition(ArrowPosition.LEFT),
+                new Notification("This is no specific type")
+                        .withType(NotificationType.NONE))));
     }
 
     private void addToRoot(IsWidget widget) {

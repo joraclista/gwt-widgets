@@ -9,6 +9,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
+import static java.util.Arrays.stream;
+
 /**
  * Created by Alisa
  * version 1.0.
@@ -23,6 +25,8 @@ public class Notification extends Composite {
 
     @UiField
     Label message;
+    @UiField
+    Label arrow;
 
     public Notification(NotificationCss css, String message, NotificationType type) {
         this.css = css;
@@ -30,8 +34,9 @@ public class Notification extends Composite {
         initWidget(binder.createAndBindUi(this));
         this.asWidget().addStyleName(css.main());
         this.message.addStyleName(css.message());
+        this.arrow.addStyleName(css.arrow());
         this.message.setText(message);
-        setType(type);
+        withType(type).withArrowPosition(ArrowPosition.NONE);
     }
 
     public Notification(String message) {
@@ -42,8 +47,16 @@ public class Notification extends Composite {
         this(NotificationBundle.BUNDLE.baseCss(), message, type);
     }
 
-    public void setType(NotificationType type) {
-        type = type == null ? NotificationType.NONE : type;
-        this.message.addStyleName(type.style(css));
+    public Notification withType(NotificationType type) {
+        final NotificationType _type = type == null ? NotificationType.NONE : type;
+        stream(NotificationType.values()).forEach(notificationType -> notificationType.style(css)
+                .forEach(style -> this.asWidget().setStyleName(style, _type.equals(notificationType))));
+        return this;
+    }
+
+    public Notification withArrowPosition(ArrowPosition arrowPosition) {
+        final ArrowPosition _arrowPosition = arrowPosition == null ? ArrowPosition.NONE : arrowPosition;
+        stream(ArrowPosition.values()).forEach(position -> arrow.setStyleName(position.style(css), _arrowPosition.equals(position)));
+        return this;
     }
 }
