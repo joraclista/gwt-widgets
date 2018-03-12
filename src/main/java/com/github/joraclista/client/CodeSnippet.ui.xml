@@ -1,0 +1,27 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:FlowPanel>
+        <g:HTMLPanel>
+            <style>
+                pre {
+                    background: #455A64;
+                    color: white;
+                }
+                .line {
+                }
+                .new {
+                    color: orange;
+                }
+                .class {
+                    color: orange;
+                }
+                .keyword {
+                    color: orange;
+                }
+            </style>
+            <pre>
+                <code ui:field="code"></code>
+            </pre>
+        </g:HTMLPanel>
+    </g:FlowPanel>
+</ui:UiBinder>

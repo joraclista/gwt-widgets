@@ -1,0 +1,27 @@
+Calendar calendar = new Calendar();
+calendar.addValueChangeHandler(event -> new Notification("Selected: " + getFormat("MMM d, yyyy").format(event.getValue()))
+        .withType(NotificationType.INFO)
+        .withPopupPosition(Position.TOP_RIGHT)
+        .withArrowPosition(ArrowPosition.LEFT)
+        .withPopupCloseButtonVisibility(true)
+        .withPopupCloseOnBackgroundClick(true)
+        .show());
+
+
+ private void configureNotificationsWidgets() {
+        addToRoot(new WidgetsGroup("Notifications", asList(
+                new Notification("This is warning")
+                        .withType(NotificationType.WARNING)
+                        .withArrowPosition(ArrowPosition.TOP),
+                new Notification("This is error")
+                        .withType(NotificationType.ERROR)
+                        .withArrowPosition(ArrowPosition.BOTTOM),
+                new Notification("This is info")
+                        .withType(NotificationType.INFO)
+                        .withArrowPosition(ArrowPosition.NONE),
+                new Notification("This is success")
+                        .withType(NotificationType.SUCCESS)
+                        .withArrowPosition(ArrowPosition.LEFT),
+                new Notification("This is no specific type")
+                        .withType(NotificationType.NONE))));
+    }
