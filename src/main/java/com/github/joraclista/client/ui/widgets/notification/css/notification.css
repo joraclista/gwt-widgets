@@ -1,0 +1,65 @@
+.main {
+    width: 300px;
+    height: 70px;
+    background: #607D8B;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.message {
+    color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-circle::before {
+    content: "\f05a";
+    font-family: 'Font Awesome 5 Solid';
+}
+
+.info::before {
+    content: "\f129";
+    font-family: 'Font Awesome 5 Solid';
+    padding-right: 15px;
+    line-height: 10px;
+    font-size: 15px;
+}
+
+.exclamation-circle::before {
+     content: "\f06a";
+     font-family: 'Font Awesome 5 Solid';
+ }
+
+.exclamation::before {
+    content: "\f12a";
+    font-family: 'Font Awesome 5 Solid';
+}
+
+.exclamation-circle::before {
+    content: "\f06a";
+    font-family: 'Font Awesome 5 Solid';
+}
+
+.exclamation::before {
+    content: "\f12a";
+    font-family: 'Font Awesome 5 Solid';
+}
+
+.check:before {
+    content: "\f00c";
+    font-family: 'Font Awesome 5 Solid';
+}
+
+.check-circle:before {
+    content: "\f058";
+    font-family: 'Font Awesome 5 Solid';
+}
+
+.vanilla {
+
+}
