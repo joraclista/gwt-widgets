@@ -14,4 +14,7 @@ public interface SnippetsBundle extends ClientBundle {
 
     @Source("calendar-snippet.txt")
     TextResource calendar();
+
+    @Source("notification-snippet.txt")
+    TextResource notification();
 }

@@ -4,6 +4,7 @@
 
 
     <inherits name='com.google.gwt.user.User'/>
+    <inherits name="com.googlecode.mgwt.dom.DOM"/>
 
 
     <entry-point class='com.github.joraclista.client.WidgetsShowcase'/>

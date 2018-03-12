@@ -6,8 +6,18 @@
                 pre {
                     background: #455A64;
                     color: white;
+                    margin: 0;
+                    padding: 20px 10px;
+                    box-sizing: border-box;
                 }
                 .line {
+                    display: flex;
+                }
+                .string, .comment {
+                   color: #8bc34a;
+                }
+                .punct {
+                    color: orange;
                 }
                 .new {
                     color: orange;
@@ -15,8 +25,17 @@
                 .class {
                     color: orange;
                 }
-                .keyword {
+                .keyword , .modifier{
                     color: orange;
+                }
+                .annotation {
+                    color: #ffeb3b;
+                }
+                .capital {
+                    color: #BA68C8;
+                }
+                .comment {
+                    color: #90A4AE !important;
                 }
             </style>
             <pre>

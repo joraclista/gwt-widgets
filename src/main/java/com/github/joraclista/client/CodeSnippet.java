@@ -1,6 +1,5 @@
 package com.github.joraclista.client;
 
-import com.github.joraclista.client.snippets.SnippetsBundle;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -23,27 +22,35 @@ public class CodeSnippet extends Composite {
     @UiField
     Element code;
 
-    public CodeSnippet() {
+    public CodeSnippet(String text) {
         initWidget(ourUiBinder.createAndBindUi(this));
-        code.setInnerHTML(Arrays.stream(SnippetsBundle.BUNDLE.calendar().getText()
-                .split("\n"))
-        .map(line -> {
-            line = line
-                    .replace("new ", " <span class='new'>new </span> ")
-                    .replace(" private ", " <span class='modifier'> private </span> ")
-                    .replace(" public ", " <span class='modifier'> public </span> ")
-                    .replace(" protected ", " <span class='modifier'> protected </span> ")
-                    .replace(" static ", " <span class='keyword'> static </span> ")
-                    .replace(" void ", " <span class='keyword'> void </span> ")
-                    .replace(" interface ", " <span class='keyword'> interface </span> ")
-                    .replace(" extends ", " <span class='keyword'> extends </span> ")
-                    .replace(" class ", " <span class='keyword'> class </span> ");
-            //.replace("\".*\"", "<span class='string'>new </span>");
+        code.setInnerHTML(Arrays.stream(text.split("\n"))
+                .map(line -> {
+                    line = line
+                            .replaceAll("<", "&lt")
+                            .replaceAll(">", "&gt");
 
+                    if (line.trim().startsWith("//")) {
+                        line = line.replaceAll("(//)(.*)", "<span class='comment'>$1$2</span>");
+                    } else {
+                        line = line
+                                .replaceAll("(;)", "<span class='punct'>$1</span>")
+                                .replaceAll("([(])(this)([)])", "$1<span class='keyword'>$2</span>$3")
+                                .replaceAll("(\\.[A-Z_]{1,})(\\W{1,})", "<span class='capital'>$1</span>$2")
+                                .replaceAll("(@\\w{2,})", "<span class='annotation'>$1</span>")
+                                .replaceAll("([\\s{1}(])(new)(\\s{1})", "$1<span class='new'>$2</span>$3")
+                                .replaceAll("(private|public|package)(\\s{1})", "<span class='modifier'>$1</span>$2")
+                                .replaceAll("(\\s{1,})(if|else|while|for)(\\s{1,})", "$1<span class='keyword'>$2</span>$3")
+                                .replaceAll("\\s{0,1}(void)\\s{1}", "<span class='keyword'> $1 </span>")
+                                .replaceAll("(\".*\")", "<span class='string'>$1</span>")
+                                .replaceAll("(^package|^import)(\\s+.*;)", "<span class='keyword'>$1</span>$2")
+                                .replaceAll("([\\s{1}(&|=])(true|false)([\\s{1})&|=])", "$1<span class='keyword'>$2</span>$3")
+                                .replaceAll("(\\s{1})(\\.class|class|interface|extends|implements|static)(\\s{1,})", "$1<span class='keyword'>$2</span>$3");
 
+                    }
 
-            return "<span  class='line'>" + line + "</span>";
-        })
-        .collect(Collectors.joining("\n")));
+                    return "<span  class='line'>" + line + "</span>";
+                })
+                .collect(Collectors.joining("\n")));
     }
 }
