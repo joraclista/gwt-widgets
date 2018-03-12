@@ -10,6 +10,20 @@
                     padding: 20px 10px;
                     box-sizing: border-box;
                 }
+
+                pre {
+                    counter-reset: linenum;
+                }
+                code span.line {
+                    counter-increment: linenum;
+                }
+                code span.line::before {
+                    content: counter(linenum);
+                    text-align: right;
+                    display: block;
+                    padding-right: 25px;
+                    color: #B0BEC5;
+                }
                 .line {
                     display: flex;
                 }
