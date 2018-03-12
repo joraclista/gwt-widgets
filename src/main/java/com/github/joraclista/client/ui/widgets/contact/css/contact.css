@@ -67,6 +67,9 @@
     width: 100%;
     object-fit: cover;
     height: 150px;
+    text-indent: -10000px;
+    background: black;
+    background: url("/img/dev.jpg");
 }
 
 .container {
@@ -140,4 +143,47 @@
 .contactInfo a {
     color: #2196F3;
     text-decoration: none;
+}
+
+.subheader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.subheader div  {
+    background: #00BCD4;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 13px;
+}
+.subheader div:nth-child\(1\):after  {
+    content: "Clients";
+    padding-left: 5px;
+}
+.subheader div:nth-child\(2\):after  {
+    content: "Projects";
+    padding-left: 5px;
+}
+
+.skillsPanel {
+    color: #607d8b;
+    font-size: 12px;
+}
+.skillsPanel div  {
+    padding: 5px 0;
+}
+.skillsPanel div:before  {
+    content: "+";
+    color: white;
+    padding: 3px 7px;
+    background: #00bcd4;
+    box-sizing: border-box;
+    font-size: 10px;
+    margin-right: 9px;
 }

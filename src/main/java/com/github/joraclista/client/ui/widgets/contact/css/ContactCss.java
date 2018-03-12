@@ -47,4 +47,8 @@ public interface ContactCss extends CssResource {
     String skype();
 
     String fb();
+
+    String subheader();
+
+    String skillsPanel();
 }
