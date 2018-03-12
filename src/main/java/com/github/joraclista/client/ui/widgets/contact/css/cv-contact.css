@@ -1,0 +1,188 @@
+@def _width 300;
+@def _height 350;
+
+@def maxRows 6;
+
+.main {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-bottom: 15px;
+}
+
+.info {
+
+}
+
+.infoType {
+    color: #607D8B;
+    font-size: 12px;
+}
+
+.contactInfo {
+    padding-left: 25px;
+    margin: 5px 0;
+}
+
+.profession {
+    color: #607D8B;
+}
+
+.name {
+    font-size: 30px;
+
+}
+
+.addInfo {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background: #00BCD4;
+    position: absolute;
+    right: 10px;
+    top: -20px;
+}
+
+.addInfo::after {
+    content: "+";
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
+
+.img {
+    width: 100%;
+    object-fit: cover;
+    height: 150px;
+    text-indent: -10000px;
+    background: black;
+    background: url("/img/dev.jpg");
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+
+    background: white;
+    color: black;
+    flex: 1 1 auto;
+    width: _width;
+    height: _height;
+    font-size: 16px;
+    box-sizing: border-box;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+}
+
+.note::before,
+.skype::before,
+.fb::before,
+.website::before,
+.telephone::before,
+.email::before {
+    position: absolute;
+    left: 0;
+    color: #00bcd4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10px;
+    height: 10px;
+}
+.note::before {
+    content: "\f249";
+    font-family: 'Font Awesome 5 Regular';
+}
+
+.skype::before {
+    content: "\f17e";
+    font-family: 'Font Awesome 5 Brands';
+}
+.fb::before {
+    content: "\f39e";;
+    font-family: 'Font Awesome 5 Brands';
+}
+.website::before {
+    content: "\f0ac";
+    font-family: 'Font Awesome 5 Solid';
+}
+
+.telephone::before {
+    content: "\f095";
+    font-family: 'Font Awesome 5 Regular';
+}
+
+.email::before {
+    content: "\f0e0";
+    font-family: 'Font Awesome 5 Regular';
+}
+
+.contactInfoPanel{
+    display: flex;
+    flex-direction: column;
+}
+
+.contactInfoPanel > div {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.contactInfo a {
+    color: #2196F3;
+    text-decoration: none;
+}
+
+.subheader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background: #00bcd4;
+}
+
+.subheader div  {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 13px;
+}
+.subheader div:nth-child\(1\):after  {
+    content: "Clients";
+    padding-left: 5px;
+}
+.subheader div:nth-child\(2\):after  {
+    content: "Projects";
+    padding-left: 5px;
+}
+
+.skillsPanel {
+    color: #607d8b;
+    font-size: 12px;
+}
+.skillsPanel div  {
+    padding: 5px 0;
+}
+.skillsPanel div:before  {
+    content: "+";
+    color: white;
+    padding: 3px 7px;
+    background: #00bcd4;
+    box-sizing: border-box;
+    font-size: 10px;
+    margin-right: 9px;
+}

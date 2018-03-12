@@ -10,6 +10,11 @@ import com.google.gwt.resources.client.ClientBundle;
 public interface ContactBundle extends ClientBundle {
     ContactBundle BUNDLE = GWT.create(ContactBundle.class);
 
+    interface CvContactCss extends ContactCss {}
+
     @Source({"contact.css"})
     ContactCss contactCss();
+
+    @Source({"cv-contact.css"})
+    CvContactCss cvContactCss();
 }
