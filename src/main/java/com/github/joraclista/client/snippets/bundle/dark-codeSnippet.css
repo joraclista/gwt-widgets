@@ -1,0 +1,54 @@
+.main, .snippet {
+    width: 100%;
+}
+
+.snippet-name {
+    display: flex;
+    margin: 0;
+    padding: 8px 5px;
+    background: #B0BEC5;
+    color: white;
+}
+
+
+.pre{
+    background: #455A64;
+    color: white;
+    margin: 0;
+    padding: 20px 10px;
+    box-sizing: border-box;
+}
+
+.pre{
+    counter-reset: linenum;
+}
+.numbered .code span.line {
+    counter-increment: linenum;
+}
+.numbered .code span.line::before {
+    content: counter(linenum);
+    text-align: right;
+    display: block;
+    padding-right: 25px;
+    color: #B0BEC5;
+}
+.line {
+    display: flex;
+}
+ .string {
+    color: #8bc34a;
+}
+.punct,
+.keyword,
+.modifier {
+    color: orange;
+}
+.annotation {
+    color: #ffeb3b;
+}
+.capital {
+    color: #BA68C8;
+}
+.comment {
+    color: #90A4AE;
+}

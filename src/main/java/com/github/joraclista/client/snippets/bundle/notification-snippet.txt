@@ -1,0 +1,8 @@
+Notification notification1 = new Notification("This is warning")
+                        .withType(NotificationType.WARNING)
+                        .withArrowPosition(ArrowPosition.TOP);
+
+Notification notification2 = new Notification("This is error")
+        .withType(NotificationType.ERROR)
+        .withArrowPosition(ArrowPosition.BOTTOM);
+

@@ -1,8 +1,9 @@
 package com.github.joraclista.client;
 
+import com.github.joraclista.client.snippets.CodeSnippet;
+import com.github.joraclista.client.snippets.bundle.SnippetsBundle;
 import com.github.joraclista.client.ui.widgets.WidgetsGroup;
 import com.github.joraclista.client.ui.widgets.calendar.Calendar;
-import com.github.joraclista.client.ui.widgets.calendar.css.CalendarBundle;
 import com.github.joraclista.client.ui.widgets.contact.Contact;
 import com.github.joraclista.client.ui.widgets.contact.ContactType;
 import com.github.joraclista.client.ui.widgets.contact.CvContact;
@@ -11,11 +12,12 @@ import com.github.joraclista.client.ui.widgets.contact.css.ContactBundle;
 import com.github.joraclista.client.ui.widgets.notification.ArrowPosition;
 import com.github.joraclista.client.ui.widgets.notification.Notification;
 import com.github.joraclista.client.ui.widgets.notification.NotificationType;
+import com.github.joraclista.client.ui.widgets.popup.Position;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 
+import static com.google.gwt.i18n.client.DateTimeFormat.getFormat;
 import static java.util.Arrays.asList;
 
 /**
@@ -35,12 +37,36 @@ public class WidgetsShowcase implements EntryPoint {
     }
 
     private void createUI() {
-        Calendar calendar = new Calendar(CalendarBundle.BUNDLE.calendarCss());
-        calendar.addValueChangeHandler(event -> Window.alert(event.getValue().toString()));
+       // addToRoot(new WidgetsGroup("Calendars", asList(new DarkCodeSnippet())));
+        configureCalendarWidget();
 
+        configureCodeSnippetWidget();
 
-        addToRoot(new WidgetsGroup("Calendars", asList(calendar)));
+        configureNotificationsWidgets();
 
+        configureBusinessCardsWidgets();
+
+        }
+
+    private void configureNotificationsWidgets() {
+        addToRoot(new WidgetsGroup("Notifications", asList(
+                new Notification("This is warning")
+                        .withType(NotificationType.WARNING)
+                        .withArrowPosition(ArrowPosition.TOP),
+                new Notification("This is error")
+                        .withType(NotificationType.ERROR)
+                        .withArrowPosition(ArrowPosition.BOTTOM),
+                new Notification("This is info")
+                        .withType(NotificationType.INFO)
+                        .withArrowPosition(ArrowPosition.NONE),
+                new Notification("This is success")
+                        .withType(NotificationType.SUCCESS)
+                        .withArrowPosition(ArrowPosition.LEFT),
+                new Notification("This is no specific type")
+                        .withType(NotificationType.NONE))));
+    }
+
+    private void configureBusinessCardsWidgets() {
         Contact contact = new Contact(ContactBundle.BUNDLE.contactCss());
         contact.setName("Ryan Brown");
         contact.setProfession("Web Developer");
@@ -63,22 +89,29 @@ public class WidgetsShowcase implements EntryPoint {
             }
         });
         addToRoot(new WidgetsGroup("Business Cards", asList(contact, cv)));
+    }
 
-        addToRoot(new WidgetsGroup("Notifications", asList(
-                new Notification("This is warning")
-                        .withType(NotificationType.WARNING)
-                        .withArrowPosition(ArrowPosition.TOP),
-                new Notification("This is error")
-                        .withType(NotificationType.ERROR)
-                        .withArrowPosition(ArrowPosition.BOTTOM),
-                new Notification("This is info")
-                        .withType(NotificationType.INFO)
-                        .withArrowPosition(ArrowPosition.NONE),
-                new Notification("This is success")
-                        .withType(NotificationType.SUCCESS)
-                        .withArrowPosition(ArrowPosition.LEFT),
-                new Notification("This is no specific type")
-                        .withType(NotificationType.NONE))));
+    private void configureCalendarWidget() {
+        Calendar calendar = new Calendar();
+        calendar.addValueChangeHandler(event ->  new Notification("Selected: " + getFormat("MMM d, yyyy").format(event.getValue()))
+                .withType(NotificationType.INFO)
+                .withPopupPosition(Position.TOP_RIGHT)
+                .withArrowPosition(ArrowPosition.LEFT)
+                .withPopupCloseButtonVisibility(true)
+                .withPopupCloseOnBackgroundClick(true)
+                .show());
+
+
+        addToRoot(new WidgetsGroup("Calendars", asList(calendar)));
+    }
+
+    private void configureCodeSnippetWidget() {
+        addToRoot(new WidgetsGroup("Code Snippets", asList(
+                new CodeSnippet(SnippetsBundle.BUNDLE.calendar().getText(), SnippetsBundle.BUNDLE.darkCss())
+                .withSnippetName("Code Listing #1")
+                .withLineNumbersEnabled(true),
+                new CodeSnippet(SnippetsBundle.BUNDLE.notification().getText(), SnippetsBundle.BUNDLE.lightCss())
+                        .withSnippetName("Code Listing #2"))));
     }
 
     private void addToRoot(IsWidget widget) {
