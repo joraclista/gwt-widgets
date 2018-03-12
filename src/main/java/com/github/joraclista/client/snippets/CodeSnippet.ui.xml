@@ -3,6 +3,8 @@
 
     <g:FlowPanel ui:field="main">
         <g:HTMLPanel ui:field="snippet">
+            <g:Label ui:field="copy" visible="false"/>
+            <g:TextArea ui:field="area" visible="true" width="0" height="0"/>
             <g:Label ui:field="snippetName" />
             <pre ui:field="pre">
                 <code ui:field="code"></code>

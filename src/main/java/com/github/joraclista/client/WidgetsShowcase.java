@@ -108,10 +108,12 @@ public class WidgetsShowcase implements EntryPoint {
     private void configureCodeSnippetWidget() {
         addToRoot(new WidgetsGroup("Code Snippets", asList(
                 new CodeSnippet(SnippetsBundle.BUNDLE.calendar().getText(), SnippetsBundle.BUNDLE.darkCss())
-                .withSnippetName("Code Listing #1")
-                .withLineNumbersEnabled(true),
+                .withSnippetName("Code Listing in Dark Scheme with line numbers and copy button #1")
+                .withLineNumbersEnabled(true)
+                .withCodeCopyButtonEnabled(true),
+
                 new CodeSnippet(SnippetsBundle.BUNDLE.notification().getText(), SnippetsBundle.BUNDLE.lightCss())
-                        .withSnippetName("Code Listing #2"))));
+                        .withSnippetName("Code Listing Light Scheme #2"))));
     }
 
     private void addToRoot(IsWidget widget) {

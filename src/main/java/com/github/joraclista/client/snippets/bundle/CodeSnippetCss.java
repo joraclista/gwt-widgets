@@ -14,6 +14,8 @@ public interface CodeSnippetCss extends CssResource {
 
     String numbered();
 
+    String copy();
+
     String annotation();
 
     String capital();

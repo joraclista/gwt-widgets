@@ -5,12 +5,11 @@ import com.github.joraclista.client.snippets.bundle.SnippetsBundle;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.PreElement;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.*;
 
 import java.util.Arrays;
 
@@ -23,6 +22,7 @@ import static java.util.stream.Collectors.joining;
 public class CodeSnippet extends Composite {
 
     private final CodeSnippetCss css;
+
 
     interface CodeSnippetBinder extends UiBinder<FlowPanel, CodeSnippet> {
     }
@@ -40,6 +40,11 @@ public class CodeSnippet extends Composite {
     FlowPanel main;
     @UiField
     HTMLPanel snippet;
+    @UiField
+    Label copy;
+    @UiField
+    TextArea area;
+    private String text;
 
 
     public CodeSnippet(String text, CodeSnippetCss css) {
@@ -47,6 +52,8 @@ public class CodeSnippet extends Composite {
         this.css = css;
         applyStyles(css);
         processCode(text);
+        this.text = text;
+        this.area.setText(text);
     }
 
     private void applyStyles(CodeSnippetCss css) {
@@ -56,6 +63,7 @@ public class CodeSnippet extends Composite {
         this.snippetName.addStyleName(css.snippetName());
         this.pre.addClassName(css.pre());
         this.code.addClassName(css.code());
+        this.copy.addStyleName(css.copy());
     }
 
     public CodeSnippet(String text) {
@@ -103,4 +111,21 @@ public class CodeSnippet extends Composite {
         this.main.setStyleName(css.numbered(), enabled);
         return this;
     }
+
+    public CodeSnippet withCodeCopyButtonEnabled(boolean enabled) {
+        this.copy.setVisible(enabled);
+        return this;
+    }
+
+    @UiHandler("copy")
+    void onCopy(ClickEvent event) {
+        copy(this.area.getElement());
+
+
+    }
+
+    public static native void copy(Element elem) /*-{
+        elem.select();
+        $wnd.document.execCommand("Copy");
+    }-*/;
 }

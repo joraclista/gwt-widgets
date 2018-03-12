@@ -1,5 +1,6 @@
 .main, .snippet {
     width: 100%;
+    position: relative;
 }
 
 .snippet-name {
@@ -10,7 +11,18 @@
     color: white;
 }
 
-
+.copy:after {
+    content: "\f24d";
+    font-family: 'Font Awesome 5 Regular';
+}
+.copy {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8px;
+    cursor: pointer;
+    color: white;
+}
 .pre{
     background: #455A64;
     color: white;
