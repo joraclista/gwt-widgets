@@ -1,11 +1,8 @@
 package com.github.joraclista.client.ui.widgets.anchorPanel;
 
 import com.github.joraclista.client.ui.widgets.WidgetsGroup;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.ui.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,12 +13,12 @@ import java.util.Map;
  * version 1.0.
  */
 public class AnchorPanel {
-
+    private static long ID = 0;
     private final AnchorPanelBundle.Css css;
     private Map<String, SimplePanel> anchors = new HashMap<>();
-    private Map<String, Integer> anchorsPositions = new HashMap<>();
     private ScrollPanel scrollPanel;
     private FlowPanel panel;
+    private Anchor anchor;
 
     public AnchorPanel() {
         this(AnchorPanelBundle.BUNDLE.css());
@@ -34,29 +31,42 @@ public class AnchorPanel {
         this.scrollPanel.add(panel = new FlowPanel());
         this.scrollPanel.setAlwaysShowScrollBars(true);
         this.scrollPanel.addStyleName(css.scroll());
+        anchor = new Anchor();
+        anchor.setVisible(false);
+        panel.add(anchor);
     }
+
     public void addWidget(String header, List<IsWidget> widgets) {
+        IsWidget group = renderWidgetGroup(header, widgets);
+        group.asWidget().getElement().setId("anchor-" + ID++);
+
         if (anchors.get(header) != null) {
-            anchors.get(header).setWidget(new WidgetsGroup(header, widgets));
+            anchors.get(header).setWidget(group);
         } else {
-            anchorsPositions.put(header, panel.getOffsetHeight());
-            SimplePanel wrapper = new SimplePanel(new WidgetsGroup(header, widgets));
-            wrapper.addDomHandler(event -> {
-                scrollToAnchor("Label 10");}, ClickEvent.getType());
+            SimplePanel wrapper = new SimplePanel(group.asWidget());
             wrapper.addStyleName(css.wrapper());
             anchors.put(header, wrapper);
-            panel.add(wrapper);
+            panel.add(group);
         }
 
+    }
+
+    protected IsWidget renderWidgetGroup(String header, List<IsWidget> widgets) {
+        return new WidgetsGroup(header, widgets);
     }
 
     public void scrollToAnchor(String header) {
-        Integer position = anchorsPositions.get(header);
-        if (position == null) {
+        SimplePanel wrapper = anchors.get(header);
+        if (wrapper == null) {
             throw new IllegalArgumentException("No such anchor!");
         }
-        scrollPanel.setVerticalScrollPosition(-position);
+       anchor.setHref("#" + wrapper.getWidget().getElement().getId());
+        click(anchor.getElement());
     }
+
+    public static native void click(Element elem) /*-{
+        elem.click()
+    }-*/;
 
     public IsWidget asWidget() {
         return scrollPanel;
