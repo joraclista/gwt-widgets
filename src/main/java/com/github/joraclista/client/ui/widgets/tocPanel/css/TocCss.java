@@ -15,4 +15,8 @@ public interface TocCss extends CssResource {
     String content();
 
     String tocContainer();
+
+    String horizontal();
+
+    String vertical();
 }

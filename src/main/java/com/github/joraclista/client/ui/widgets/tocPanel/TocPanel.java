@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,7 @@ public class TocPanel extends Composite {
         this.tocContainer.addStyleName(css.tocContainer());
         this.toc.addStyleName(css.toc());
         this.asWidget().addStyleName(css.main());
+        withLayout(Layout.HORIZONTAL);
 
     }
 
@@ -63,6 +65,13 @@ public class TocPanel extends Composite {
         toc.add(renderTocLabel(header, "#" + group.asWidget().getElement().getId()));
         content.add(group);
 
+    }
+
+    public TocPanel withLayout(Layout layout) {
+        Layout _layout = layout == null ? Layout.HORIZONTAL : layout;
+        Arrays.stream(Layout.values())
+                .forEach(layOut -> this.asWidget().setStyleName(layOut.style(css), _layout.equals(layOut)));
+        return this;
     }
 
     protected IsWidget renderTocLabel(String header, String url) {
