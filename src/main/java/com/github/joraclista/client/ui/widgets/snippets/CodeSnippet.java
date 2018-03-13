@@ -1,7 +1,7 @@
-package com.github.joraclista.client.snippets;
+package com.github.joraclista.client.ui.widgets.snippets;
 
-import com.github.joraclista.client.snippets.bundle.CodeSnippetCss;
-import com.github.joraclista.client.snippets.bundle.SnippetsBundle;
+import com.github.joraclista.client.ui.widgets.snippets.bundle.css.CodeSnippetCss;
+import com.github.joraclista.client.ui.widgets.snippets.bundle.SnippetsBundle;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.PreElement;
@@ -13,6 +13,8 @@ import com.google.gwt.user.client.ui.*;
 
 import java.util.Arrays;
 
+import static com.github.joraclista.client.ui.widgets.snippets.CodeProcessor.CODE_LINE_PROCESSORS;
+import static com.github.joraclista.client.ui.widgets.snippets.CodeProcessor.COMMENT_LINE_PROCESSORS;
 import static java.util.stream.Collectors.joining;
 
 /**
@@ -73,26 +75,24 @@ public class CodeSnippet extends Composite {
     private void processCode(String text) {
         code.setInnerHTML(Arrays.stream(text.split("\n"))
                 .map(line -> {
-                    line = line
-                            .replaceAll("<", "&lt")
-                            .replaceAll(">", "&gt");
 
                     if (line.trim().startsWith("//")) {
-                        line = line.replaceAll("(//)(.*)", "<span class='comment'>$1$2</span>");
+                        line = COMMENT_LINE_PROCESSORS.apply(new ProcessingItem(line, css));
                     } else {
-                        line = line
-                                .replaceAll("(;)", "<span class='" + css.punct() + "'>$1</span>")
-                                .replaceAll("([(])(this)([)])", "$1<span class='" + css.keyword() + "'>$2</span>$3")
-                                .replaceAll("(\\.[A-Z_]{1,})(\\W{1,})", "<span class='" + css.capital() + "'>$1</span>$2")
-                                .replaceAll("(@\\w{2,})", "<span class='" + css.annotation() + "'>$1</span>")
-                                .replaceAll("([\\s{1}(])(new)(\\s{1})", "$1<span class='" + css.keyword() + "'>$2</span>$3")
-                                .replaceAll("(private|public|package)(\\s{1})", "<span class='" + css.modifier() + "'>$1</span>$2")
-                                .replaceAll("(\\s{1,})(if|else|while|for)(\\s{1,})", "$1<span class='" + css.keyword() + "'>$2</span>$3")
-                                .replaceAll("\\s{0,1}(void)\\s{1}", "<span class='" + css.keyword() + "'> $1 </span>")
-                                .replaceAll("(\".*\")", "<span class='" + css.string() + "'>$1</span>")
-                                .replaceAll("(^package|^import)(\\s+.*;)", "<span class='" + css.keyword() + "'>$1</span>$2")
-                                .replaceAll("([\\s{1}(&|=])(true|false)([\\s{1})&|=])", "$1<span class='" + css.keyword() + "'>$2</span>$3")
-                                .replaceAll("(\\s{1})(\\.class|class|interface|extends|implements|static)(\\s{1,})", "$1<span class='" + css.keyword() + "'>$2</span>$3");
+                        line = CODE_LINE_PROCESSORS.apply(new ProcessingItem(line, css));
+//                        line = line
+//                                .replaceAll("(;)", "<span class='" + css.punct() + "'>$1</span>")
+//                                .replaceAll("([(])(this)([)])", "$1<span class='" + css.keyword() + "'>$2</span>$3")
+//                                .replaceAll("(\\.[A-Z_]{1,})(\\W{1,})", "<span class='" + css.capital() + "'>$1</span>$2")
+//                                .replaceAll("(@\\w{2,})", "<span class='" + css.annotation() + "'>$1</span>")
+//                                .replaceAll("([\\s{1}(])(new)(\\s{1})", "$1<span class='" + css.keyword() + "'>$2</span>$3")
+//                                .replaceAll("(private|public|package)(\\s{1})", "<span class='" + css.modifier() + "'>$1</span>$2")
+//                                .replaceAll("(\\s{1,})(if|else|while|for)(\\s{1,})", "$1<span class='" + css.keyword() + "'>$2</span>$3")
+//                                .replaceAll("\\s{0,1}(void)\\s{1}", "<span class='" + css.keyword() + "'> $1 </span>")
+//                                .replaceAll("(\".*\")", "<span class='" + css.string() + "'>$1</span>")
+//                                .replaceAll("(^package|^import)(\\s+.*;)", "<span class='" + css.keyword() + "'>$1</span>$2")
+//                                .replaceAll("([\\s{1}(&|=])(true|false)([\\s{1})&|=])", "$1<span class='" + css.keyword() + "'>$2</span>$3")
+//                                .replaceAll("(\\s{1})(\\.class|class|interface|extends|implements|static)(\\s{1,})", "$1<span class='" + css.keyword() + "'>$2</span>$3");
 
                     }
 
@@ -120,8 +120,6 @@ public class CodeSnippet extends Composite {
     @UiHandler("copy")
     void onCopy(ClickEvent event) {
         copy(this.area.getElement());
-
-
     }
 
     public static native void copy(Element elem) /*-{

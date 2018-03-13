@@ -1,5 +1,6 @@
-package com.github.joraclista.client.snippets.bundle;
+package com.github.joraclista.client.ui.widgets.snippets.bundle;
 
+import com.github.joraclista.client.ui.widgets.snippets.bundle.css.CodeSnippetCss;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
@@ -16,15 +17,15 @@ public interface SnippetsBundle extends ClientBundle {
 
     interface LightCss extends CodeSnippetCss {}
 
-    @Source("calendar-snippet.txt")
+    @Source("source/calendar-snippet.txt")
     TextResource calendar();
 
-    @Source("notification-snippet.txt")
+    @Source("source/notification-snippet.txt")
     TextResource notification();
 
-    @Source({"dark-codeSnippet.css"})
+    @Source({"css/dark-codeSnippet.css"})
     DarkCss darkCss();
 
-    @Source({"light-codeSnippet.css"})
+    @Source({"css/light-codeSnippet.css"})
     LightCss lightCss();
 }

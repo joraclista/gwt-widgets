@@ -1,4 +1,4 @@
-package com.github.joraclista.client.snippets.bundle;
+package com.github.joraclista.client.ui.widgets.snippets.bundle.css;
 
 import com.google.gwt.resources.client.CssResource;
 
