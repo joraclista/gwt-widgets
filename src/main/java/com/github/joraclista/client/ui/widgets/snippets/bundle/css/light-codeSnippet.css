@@ -39,12 +39,13 @@
 .numbered .code span.line::before {
     content: counter(linenum);
     text-align: right;
-    display: block;
+    display: inline-block;
     padding-right: 25px;
     color: #263238;
+    width: 30px;
 }
 .line {
-    display: flex;
+    display: inline-block;
 }
 .string {
     color: #673ab7;
@@ -62,4 +63,8 @@
 }
 .comment {
     color: #90A4AE !important;
+}
+
+.digits {
+    color: #2196F3;
 }

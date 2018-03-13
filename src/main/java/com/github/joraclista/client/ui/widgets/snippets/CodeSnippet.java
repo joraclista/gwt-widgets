@@ -81,19 +81,9 @@ public class CodeSnippet extends Composite {
                     } else {
                         line = CODE_LINE_PROCESSORS.apply(new ProcessingItem(line, css));
 //                        line = line
-//                                .replaceAll("(;)", "<span class='" + css.punct() + "'>$1</span>")
-//                                .replaceAll("([(])(this)([)])", "$1<span class='" + css.keyword() + "'>$2</span>$3")
-//                                .replaceAll("(\\.[A-Z_]{1,})(\\W{1,})", "<span class='" + css.capital() + "'>$1</span>$2")
-//                                .replaceAll("(@\\w{2,})", "<span class='" + css.annotation() + "'>$1</span>")
-//                                .replaceAll("([\\s{1}(])(new)(\\s{1})", "$1<span class='" + css.keyword() + "'>$2</span>$3")
-//                                .replaceAll("(private|public|package)(\\s{1})", "<span class='" + css.modifier() + "'>$1</span>$2")
-//                                .replaceAll("(\\s{1,})(if|else|while|for)(\\s{1,})", "$1<span class='" + css.keyword() + "'>$2</span>$3")
+//                             .replaceAll("(private|public|package)(\\s{1})", "<span class='" + css.modifier() + "'>$1</span>$2")
 //                                .replaceAll("\\s{0,1}(void)\\s{1}", "<span class='" + css.keyword() + "'> $1 </span>")
-//                                .replaceAll("(\".*\")", "<span class='" + css.string() + "'>$1</span>")
-//                                .replaceAll("(^package|^import)(\\s+.*;)", "<span class='" + css.keyword() + "'>$1</span>$2")
-//                                .replaceAll("([\\s{1}(&|=])(true|false)([\\s{1})&|=])", "$1<span class='" + css.keyword() + "'>$2</span>$3")
-//                                .replaceAll("(\\s{1})(\\.class|class|interface|extends|implements|static)(\\s{1,})", "$1<span class='" + css.keyword() + "'>$2</span>$3");
-
+//
                     }
 
                     return "<span  class='" + css.line() + "'>" + line + "</span>";

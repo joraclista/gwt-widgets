@@ -38,4 +38,6 @@ public interface CodeSnippetCss extends CssResource {
     String pre();
 
     String code();
+
+    String digits();
 }
