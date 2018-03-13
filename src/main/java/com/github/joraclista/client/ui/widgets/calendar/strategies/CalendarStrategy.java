@@ -77,6 +77,7 @@ public abstract class CalendarStrategy implements HasValueChangeHandlers<RenderM
         return css;
     }
 
+    @Override
     public void fireEvent(GwtEvent<?> event) {
         ensureHandlers().fireEvent(event);
     }

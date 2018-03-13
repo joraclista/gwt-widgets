@@ -1,6 +1,5 @@
-package com.github.joraclista.client;
+package com.github.joraclista.client.ui.showcase;
 
-import com.github.joraclista.client.ui.CheckboxesPanel;
 import com.github.joraclista.client.ui.widgets.calendar.Calendar;
 import com.github.joraclista.client.ui.widgets.contact.Contact;
 import com.github.joraclista.client.ui.widgets.contact.ContactType;
@@ -51,8 +50,14 @@ private TocPanel tocPanel;
 
         configureCheckBoxWidgets();
 
+        configureRadioButtonWidgets();
+
         configureBusinessCardsWidgets();
 
+    }
+
+    private void configureRadioButtonWidgets() {
+        tocPanel.addWidget("Radio Buttons", asList(new RadioPanel()));
     }
 
     private void configureCheckBoxWidgets() {

@@ -1,4 +1,4 @@
-package com.github.joraclista.client;
+package com.github.joraclista.client.ui.showcase;
 
 import com.github.joraclista.client.ui.widgets.checkbox.CheckBox;
 import com.github.joraclista.client.ui.widgets.popup.Popup;

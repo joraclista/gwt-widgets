@@ -1,0 +1,37 @@
+.panel {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    margin: 5px;
+}
+
+
+.check:before {
+    content: "";
+    height: 14px;
+    width: 14px;
+    display: flex;
+    align-self: center;
+    margin-right: 15px;
+    box-sizing: border-box;
+}
+
+.checked .check:before  {
+    background: #D32F2F;
+}
+.unchecked .check:before  {
+    background: #B0BEC5;
+}
+.label {
+    padding-left: 5px;
+    display: flex;
+    align-self: center;
+    color: #546E7A;
+}
+
+.disabled .check:before  {
+    opacity: 0.2;
+}
+.disabled .label  {
+    color: #B0BEC5;
+}

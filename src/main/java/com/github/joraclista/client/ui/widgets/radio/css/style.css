@@ -1,0 +1,45 @@
+.panel {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    margin: 5px;
+}
+
+
+.check:before {
+    content: "\f111";
+    font-family: "Font Awesome 5 Solid";
+    color: white;
+    font-size: 8px;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+    height: 17px;
+    width: 17px;
+    border-radius: 50px;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    transition: all 100ms ease;
+    margin-right: 15px;
+    background: #4dd0e1;
+    justify-content: center;
+}
+
+.checked .check:before  {
+
+}
+.unchecked .check:before  {
+    font-size: 0;
+}
+.label {
+    padding-left: 5px;
+    display: flex;
+    align-self: center;
+    color: #546E7A;
+}
+
+.disabled .check:before  {
+    opacity: 0.2;
+}
+.disabled .label  {
+    color: #B0BEC5;
+}
