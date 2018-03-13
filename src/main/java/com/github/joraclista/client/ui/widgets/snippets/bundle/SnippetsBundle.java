@@ -17,11 +17,11 @@ public interface SnippetsBundle extends ClientBundle {
 
     interface LightCss extends CodeSnippetCss {}
 
-    @Source("source/calendar-snippet.txt")
-    TextResource calendar();
+    @Source("source/snippet-1.txt")
+    TextResource snippet1();
 
-    @Source("source/notification-snippet.txt")
-    TextResource notification();
+    @Source("source/snippet-2.txt")
+    TextResource snippet2();
 
     @Source({"css/dark-codeSnippet.css"})
     DarkCss darkCss();
