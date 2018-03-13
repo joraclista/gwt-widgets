@@ -1,0 +1,39 @@
+.panel {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.check {
+    padding: 4px;
+    background: #4DD0E1;
+    /*border: 1px solid #03A9F4;*/
+    display: flex;
+    align-self: center;
+}
+
+.check:after {
+    content: "\f00c";
+    font-family: 'Font Awesome 5 Solid';
+    color: white;
+    opacity: 0.2;
+    font-size: 10px;
+}
+
+.checked .check:after  {
+    opacity: 1;
+}
+
+.label {
+    padding-left: 5px;
+    display: flex;
+    align-self: center;
+    color: #546E7A;
+}
+
+.disabled .check  {
+    opacity: 0.2;
+}
+.disabled .label  {
+    color: #B0BEC5;
+}

@@ -1,5 +1,6 @@
 package com.github.joraclista.client;
 
+import com.github.joraclista.client.ui.widgets.checkbox.CheckBox;
 import com.github.joraclista.client.ui.widgets.popup.Popup;
 import com.github.joraclista.client.ui.widgets.popup.Position;
 import com.google.gwt.core.client.GWT;
@@ -7,7 +8,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 
@@ -38,10 +38,10 @@ public class PopupConfig extends Composite {
     @UiHandler("showPopup")
     void showPopup(ClickEvent event) {
         popup
-                .withAutoHideEnabled(autoHide.getValue())
-                .withCloseOnBackgroundClick(bgClick.getValue())
-                .withAppliedBackground(addBackground.getValue())
-                .withCloseButtonVisibility(enableCloseButton.getValue())
+                .withAutoHideEnabled(autoHide.isChecked())
+                .withCloseOnBackgroundClick(bgClick.isChecked())
+                .withAppliedBackground(addBackground.isChecked())
+                .withCloseButtonVisibility(enableCloseButton.isChecked())
                 .show();
     }
 

@@ -1,5 +1,6 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:checkbox="urn:import:com.github.joraclista.client.ui.widgets.checkbox">
     <ui:style>
 
         .button {
@@ -62,10 +63,10 @@
 
     </ui:style>
     <g:FlowPanel addStyleNames="{style.container}">
-        <g:CheckBox ui:field="autoHide" text="Enable auto hide" addStyleNames="{style.check}  {style.check-1}"/>
-        <g:CheckBox ui:field="bgClick" text="Enable hide on background click" addStyleNames="{style.check}  {style.check-2}"/>
-        <g:CheckBox ui:field="addBackground" text="Enable dark background" addStyleNames="{style.check}  {style.check-3}"/>
-        <g:CheckBox ui:field="enableCloseButton" text="Enable close button"  value="true" addStyleNames="{style.check}  {style.check-4}"/>
+        <checkbox:CheckBox ui:field="autoHide" label="Enable auto hide" addStyleNames="{style.check}  {style.check-1}"/>
+        <checkbox:CheckBox ui:field="bgClick" label="Enable hide on background click" addStyleNames="{style.check}  {style.check-2}"/>
+        <checkbox:CheckBox ui:field="addBackground" label="Enable dark background" addStyleNames="{style.check}  {style.check-3}"/>
+        <checkbox:CheckBox ui:field="enableCloseButton" enabled="false" label="Enable close button"  checked="true" addStyleNames="{style.check}  {style.check-4}"/>
         <g:RadioButton ui:field="TOP_CENTER" name="position" value="false"  addStyleNames="{style.radio} {style.radio-1}">TOP_CENTER</g:RadioButton>
         <g:RadioButton ui:field="TOP_LEFT"  name="position" value="false"  addStyleNames="{style.radio} {style.radio-2}">TOP_LEFT</g:RadioButton>
         <g:RadioButton ui:field="TOP_RIGHT"  name="position" value="false"  addStyleNames="{style.radio}  {style.radio-3}">TOP_RIGHT</g:RadioButton>
