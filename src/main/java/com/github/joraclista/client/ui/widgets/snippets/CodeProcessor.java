@@ -109,7 +109,4 @@ public interface CodeProcessor extends Function<ProcessingItem, ProcessingItem> 
             .andThen(_item -> _item.getLine())
             .apply(item);
 
-    public static void main(String[] args) {
-        int i=0;
-    }
 }

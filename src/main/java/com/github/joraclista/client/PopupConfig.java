@@ -26,6 +26,8 @@ public class PopupConfig extends Composite {
     CheckBox bgClick;
     @UiField
     CheckBox addBackground;
+    @UiField
+    CheckBox enableCloseButton;
 
     private Popup popup = new Popup();
 
@@ -36,10 +38,11 @@ public class PopupConfig extends Composite {
     @UiHandler("showPopup")
     void showPopup(ClickEvent event) {
         popup
-            .withAutoHideEnabled(autoHide.getValue())
-            .withCloseOnBackgroundClick(bgClick.getValue())
-            .withAppliedBackground(addBackground.getValue())
-            .show();
+                .withAutoHideEnabled(autoHide.getValue())
+                .withCloseOnBackgroundClick(bgClick.getValue())
+                .withAppliedBackground(addBackground.getValue())
+                .withCloseButtonVisibility(enableCloseButton.getValue())
+                .show();
     }
 
     @UiHandler("TOP_CENTER")

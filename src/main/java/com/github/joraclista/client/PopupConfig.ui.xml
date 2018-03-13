@@ -38,6 +38,10 @@
             grid-column: 1;
             grid-row: 3;
         }
+        .check-4 {
+            grid-column: 1;
+            grid-row: 4;
+        }
         .radio-1 {
             grid-column: 2;
             grid-row: 1;
@@ -61,6 +65,7 @@
         <g:CheckBox ui:field="autoHide" text="Enable auto hide" addStyleNames="{style.check}  {style.check-1}"/>
         <g:CheckBox ui:field="bgClick" text="Enable hide on background click" addStyleNames="{style.check}  {style.check-2}"/>
         <g:CheckBox ui:field="addBackground" text="Enable dark background" addStyleNames="{style.check}  {style.check-3}"/>
+        <g:CheckBox ui:field="enableCloseButton" text="Enable close button"  value="true" addStyleNames="{style.check}  {style.check-4}"/>
         <g:RadioButton ui:field="TOP_CENTER" name="position" value="false"  addStyleNames="{style.radio} {style.radio-1}">TOP_CENTER</g:RadioButton>
         <g:RadioButton ui:field="TOP_LEFT"  name="position" value="false"  addStyleNames="{style.radio} {style.radio-2}">TOP_LEFT</g:RadioButton>
         <g:RadioButton ui:field="TOP_RIGHT"  name="position" value="false"  addStyleNames="{style.radio}  {style.radio-3}">TOP_RIGHT</g:RadioButton>

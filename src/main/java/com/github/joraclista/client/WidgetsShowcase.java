@@ -1,7 +1,5 @@
 package com.github.joraclista.client;
 
-import com.github.joraclista.client.ui.widgets.WidgetsGroup;
-import com.github.joraclista.client.ui.widgets.anchorPanel.AnchorPanel;
 import com.github.joraclista.client.ui.widgets.calendar.Calendar;
 import com.github.joraclista.client.ui.widgets.contact.Contact;
 import com.github.joraclista.client.ui.widgets.contact.ContactType;
@@ -14,9 +12,9 @@ import com.github.joraclista.client.ui.widgets.notification.NotificationType;
 import com.github.joraclista.client.ui.widgets.popup.Position;
 import com.github.joraclista.client.ui.widgets.snippets.CodeSnippet;
 import com.github.joraclista.client.ui.widgets.snippets.bundle.SnippetsBundle;
+import com.github.joraclista.client.ui.widgets.tocPanel.TocPanel;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import static com.google.gwt.i18n.client.DateTimeFormat.getFormat;
@@ -29,7 +27,7 @@ public class WidgetsShowcase implements EntryPoint {
 
     private final String ROOT_PANEL_SLOT_ID = "slot";
 
-
+private TocPanel tocPanel;
 
     /**
      * This is the entry point method.
@@ -39,6 +37,9 @@ public class WidgetsShowcase implements EntryPoint {
     }
 
     private void createUI() {
+        tocPanel = new TocPanel();
+        addToRoot(tocPanel.asWidget());
+
         configureCodeSnippetWidget();
 
         configureCalendarWidget();
@@ -49,18 +50,14 @@ public class WidgetsShowcase implements EntryPoint {
 
         configureBusinessCardsWidgets();
 
-        AnchorPanel anchorPanel = new AnchorPanel();
-        addToRoot(anchorPanel.asWidget());
-        for(int i = 0; i < 20; i++)
-            anchorPanel.addWidget("Label " + i, asList(new Label("label-" + i)));
-        }
+    }
 
     private void configurePopupsWidgets() {
-        addToRoot(new WidgetsGroup("Popups", asList(new PopupConfig())));
+        tocPanel.addWidget("Popups", asList(new PopupConfig()));
     }
 
     private void configureNotificationsWidgets() {
-        addToRoot(new WidgetsGroup("Notifications", asList(
+        tocPanel.addWidget("Notifications", asList(
                 new Notification("This is warning")
                         .withType(NotificationType.WARNING)
                         .withArrowPosition(ArrowPosition.TOP),
@@ -74,7 +71,7 @@ public class WidgetsShowcase implements EntryPoint {
                         .withType(NotificationType.SUCCESS)
                         .withArrowPosition(ArrowPosition.LEFT),
                 new Notification("This is no specific type")
-                        .withType(NotificationType.NONE))));
+                        .withType(NotificationType.NONE)));
     }
 
     private void configureBusinessCardsWidgets() {
@@ -99,7 +96,7 @@ public class WidgetsShowcase implements EntryPoint {
                 setImageUrl("https://media.gettyimages.com/photos/man-with-a-mustache-picture-id516040293");
             }
         });
-        addToRoot(new WidgetsGroup("Business Cards", asList(contact, cv)));
+        tocPanel.addWidget("Business Cards", asList(contact, cv));
     }
 
     private void configureCalendarWidget() {
@@ -113,18 +110,18 @@ public class WidgetsShowcase implements EntryPoint {
                 .show());
 
 
-        addToRoot(new WidgetsGroup("Calendars", asList(calendar)));
+        tocPanel.addWidget("Calendars", asList(calendar));
     }
 
     private void configureCodeSnippetWidget() {
-        addToRoot(new WidgetsGroup("Code Snippets", asList(
+        tocPanel.addWidget("Code Snippets", asList(
                 new CodeSnippet(SnippetsBundle.BUNDLE.snippet1().getText(), SnippetsBundle.BUNDLE.darkCss())
                 .withSnippetName("Code Listing in Dark Scheme with line numbers and copy button #1")
                 .withLineNumbersEnabled(true)
                 .withCodeCopyButtonEnabled(true),
 
                 new CodeSnippet(SnippetsBundle.BUNDLE.snippet2().getText(), SnippetsBundle.BUNDLE.lightCss())
-                        .withSnippetName("Code Listing Light Scheme #2"))));
+                        .withSnippetName("Code Listing Light Scheme #2")));
     }
 
     private void addToRoot(IsWidget widget) {
