@@ -1,8 +1,7 @@
 package com.github.joraclista.client;
 
-import com.github.joraclista.client.snippets.CodeSnippet;
-import com.github.joraclista.client.snippets.bundle.SnippetsBundle;
 import com.github.joraclista.client.ui.widgets.WidgetsGroup;
+import com.github.joraclista.client.ui.widgets.anchorPanel.AnchorPanel;
 import com.github.joraclista.client.ui.widgets.calendar.Calendar;
 import com.github.joraclista.client.ui.widgets.contact.Contact;
 import com.github.joraclista.client.ui.widgets.contact.ContactType;
@@ -13,8 +12,11 @@ import com.github.joraclista.client.ui.widgets.notification.ArrowPosition;
 import com.github.joraclista.client.ui.widgets.notification.Notification;
 import com.github.joraclista.client.ui.widgets.notification.NotificationType;
 import com.github.joraclista.client.ui.widgets.popup.Position;
+import com.github.joraclista.client.ui.widgets.snippets.CodeSnippet;
+import com.github.joraclista.client.ui.widgets.snippets.bundle.SnippetsBundle;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import static com.google.gwt.i18n.client.DateTimeFormat.getFormat;
@@ -37,16 +39,25 @@ public class WidgetsShowcase implements EntryPoint {
     }
 
     private void createUI() {
-       // addToRoot(new WidgetsGroup("Calendars", asList(new DarkCodeSnippet())));
-        configureCalendarWidget();
-
         configureCodeSnippetWidget();
+
+        configureCalendarWidget();
 
         configureNotificationsWidgets();
 
+        configurePopupsWidgets();
+
         configureBusinessCardsWidgets();
 
+        AnchorPanel anchorPanel = new AnchorPanel();
+        addToRoot(anchorPanel.asWidget());
+        for(int i = 0; i < 20; i++)
+            anchorPanel.addWidget("Label " + i, asList(new Label("label-" + i)));
         }
+
+    private void configurePopupsWidgets() {
+        addToRoot(new WidgetsGroup("Popups", asList(new PopupConfig())));
+    }
 
     private void configureNotificationsWidgets() {
         addToRoot(new WidgetsGroup("Notifications", asList(
@@ -107,12 +118,12 @@ public class WidgetsShowcase implements EntryPoint {
 
     private void configureCodeSnippetWidget() {
         addToRoot(new WidgetsGroup("Code Snippets", asList(
-                new CodeSnippet(SnippetsBundle.BUNDLE.calendar().getText(), SnippetsBundle.BUNDLE.darkCss())
+                new CodeSnippet(SnippetsBundle.BUNDLE.snippet1().getText(), SnippetsBundle.BUNDLE.darkCss())
                 .withSnippetName("Code Listing in Dark Scheme with line numbers and copy button #1")
                 .withLineNumbersEnabled(true)
                 .withCodeCopyButtonEnabled(true),
 
-                new CodeSnippet(SnippetsBundle.BUNDLE.notification().getText(), SnippetsBundle.BUNDLE.lightCss())
+                new CodeSnippet(SnippetsBundle.BUNDLE.snippet2().getText(), SnippetsBundle.BUNDLE.lightCss())
                         .withSnippetName("Code Listing Light Scheme #2"))));
     }
 

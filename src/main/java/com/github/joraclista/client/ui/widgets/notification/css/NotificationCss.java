@@ -1,12 +1,12 @@
 package com.github.joraclista.client.ui.widgets.notification.css;
 
-import com.google.gwt.resources.client.CssResource;
+import com.github.joraclista.client.ui.widgets.popup.css.PopupCss;
 
 /**
  * Created by Alisa
  * version 1.0.
  */
-public interface NotificationCss extends CssResource {
+public interface NotificationCss extends PopupCss {
 
 
     String main();
@@ -52,4 +52,6 @@ public interface NotificationCss extends CssResource {
 
     @ClassName("arrow-none")
     String arrowNone();
+
+
 }

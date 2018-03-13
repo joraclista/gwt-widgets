@@ -1,5 +1,6 @@
 package com.github.joraclista.client.ui.widgets.calendar;
 
+import com.github.joraclista.client.ui.widgets.calendar.css.CalendarBundle;
 import com.github.joraclista.client.ui.widgets.calendar.css.CalendarCss;
 import com.github.joraclista.client.ui.widgets.calendar.strategies.CalendarStrategy;
 import com.github.joraclista.client.ui.widgets.calendar.strategies.SelectionType;
@@ -33,11 +34,11 @@ import static java.util.stream.Collectors.toMap;
  */
 public class Calendar extends Composite implements HasValueChangeHandlers<Date> {
 
-    interface CalendarUiBinder extends UiBinder<FlowPanel, Calendar> {
+
+    interface Binder extends UiBinder<FlowPanel, Calendar> {
     }
 
-    private static CalendarUiBinder ourUiBinder = GWT.create(CalendarUiBinder.class);
-
+    private static Binder ourUiBinder = GWT.create(Binder.class);
 
     private final CalendarCss css;
     private Date date;
@@ -66,6 +67,11 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
     private Map<SelectionType, CalendarStrategy> renderingStrategiesMap = new HashMap<>();
     private DaysName startOfWeek;
     private Map<DaysName, String> dayNamesHeadersMap;
+
+
+    public Calendar() {
+        this(CalendarBundle.BUNDLE.calendarCss());
+    }
 
     public Calendar(CalendarCss css) {
         this.css = css;
@@ -103,7 +109,13 @@ public class Calendar extends Composite implements HasValueChangeHandlers<Date> 
             renderingStrategiesMap.put(strategy, calendarStrategy);
             calendarStrategy.addValueChangeHandler(event -> {
                 date = event.getValue().getDate();
-                setStrategy(event.getValue().getSelectionType());
+                SelectionType selectionType = event.getValue().getSelectionType();
+
+                if (SelectionType.NONE.equals(selectionType)) {
+                   ValueChangeEvent.fire(Calendar.this, date);
+                } else {
+                    setStrategy(selectionType);
+                }
             });
         });
 

@@ -8,6 +8,7 @@
     justify-content: center;
     align-content: center;
     transition: 500ms all;
+    z-index: 100;
 }
 
 .popup-content {
@@ -65,4 +66,9 @@
 
 .animate {
     opacity: 0;
+}
+
+.noWidget {
+    background: #FF9800;
+    padding: 20px 50px;
 }

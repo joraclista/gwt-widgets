@@ -1,0 +1,70 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <ui:style>
+
+        .button {
+            cursor: pointer;
+            padding: 20px 30px;
+            background: #607d8b;
+            box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            grid-column: 3;
+            grid-row: 1 / 3;
+            color: white;
+        }
+
+        .check {
+
+        }
+
+        .radio {
+
+        }
+
+        .container {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr);
+            color: #607D8B;
+        }
+        .check-1 {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .check-2 {
+            grid-column: 1;
+            grid-row: 2;
+        }
+        .check-3 {
+            grid-column: 1;
+            grid-row: 3;
+        }
+        .radio-1 {
+            grid-column: 2;
+            grid-row: 1;
+        }
+        .radio-2 {
+            grid-column: 2;
+            grid-row: 2;
+        }
+        .radio-3 {
+            grid-column: 2;
+            grid-row: 3;
+        }
+        .radio-4 {
+            grid-column: 2;
+            grid-row: 4;
+        }
+
+
+    </ui:style>
+    <g:FlowPanel addStyleNames="{style.container}">
+        <g:CheckBox ui:field="autoHide" text="Enable auto hide" addStyleNames="{style.check}  {style.check-1}"/>
+        <g:CheckBox ui:field="bgClick" text="Enable hide on background click" addStyleNames="{style.check}  {style.check-2}"/>
+        <g:CheckBox ui:field="addBackground" text="Enable dark background" addStyleNames="{style.check}  {style.check-3}"/>
+        <g:RadioButton ui:field="TOP_CENTER" name="position" value="false"  addStyleNames="{style.radio} {style.radio-1}">TOP_CENTER</g:RadioButton>
+        <g:RadioButton ui:field="TOP_LEFT"  name="position" value="false"  addStyleNames="{style.radio} {style.radio-2}">TOP_LEFT</g:RadioButton>
+        <g:RadioButton ui:field="TOP_RIGHT"  name="position" value="false"  addStyleNames="{style.radio}  {style.radio-3}">TOP_RIGHT</g:RadioButton>
+        <g:RadioButton ui:field="CENTER"  name="position" value="false"  addStyleNames="{style.radio}  {style.radio-4}">CENTER</g:RadioButton>
+        <g:Label ui:field="showPopup" text="Click me" addStyleNames="{style.button}"/>
+    </g:FlowPanel>
+</ui:UiBinder>

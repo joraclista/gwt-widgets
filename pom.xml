@@ -98,6 +98,13 @@
             <version>2.8.2</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.googlecode.mgwt/mgwt -->
+        <dependency>
+            <groupId>com.googlecode.mgwt</groupId>
+            <artifactId>mgwt</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.google.gwt/gwt-servlet -->
         <dependency>
             <groupId>com.google.gwt</groupId>

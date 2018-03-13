@@ -21,7 +21,7 @@ import static com.github.joraclista.client.ui.common.TaskUtil.scheduleWithDelay;
 public class Popup extends Composite {
 
 
-    public static final Label NO_WIDGET = new Label("no widget");
+    public static final Label NO_WIDGET = new Label("No Widget was added. Default is used");
     private static final int AUTO_HIDE_DELAY_DEFAULT_MS = 5000;
 
     interface Binder extends UiBinder<FlowPanel, Popup> {
@@ -128,16 +128,13 @@ public class Popup extends Composite {
         this.popup.addStyleName(css.popup());
         this.content.addStyleName(css.content());
         this.closeButton.addStyleName(css.closeButton());
+        NO_WIDGET.addStyleName(css.noWidget());
         withPosition(Position.CENTER);
     }
 
     public void show() {
         cancelTimer();
         RootPanel.get().add(this.asWidget());
-
-
-
-
     }
 
     @Override

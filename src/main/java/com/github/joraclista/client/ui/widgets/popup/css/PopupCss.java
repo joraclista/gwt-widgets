@@ -32,4 +32,6 @@ public interface PopupCss extends CssResource {
     String popupPositionTopCenter();
 
     String animate();
+
+    String noWidget();
 }

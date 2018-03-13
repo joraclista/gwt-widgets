@@ -31,7 +31,6 @@ public final class TaskUtil {
             }
         };
         timer.schedule(delayMs);
-        timer.run();
         return timer;
     }
 
@@ -44,7 +43,6 @@ public final class TaskUtil {
             }
         };
         timer.scheduleRepeating(repeatPeriod);
-        timer.run();
         return timer;
     }
 }

@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import static com.github.joraclista.client.ui.widgets.calendar.DaysName.values;
+import static com.google.gwt.event.logical.shared.ValueChangeEvent.fire;
 import static com.google.gwt.i18n.client.DateTimeFormat.getFormat;
 import static com.google.gwt.user.datepicker.client.CalendarUtil.*;
 import static java.util.Arrays.asList;
@@ -67,7 +68,7 @@ class DayInMonthStrategy extends CalendarStrategy {
             selectionPanel.add(dayLabel);
 
 
-            handlers.add(dayLabel.addClickHandler(event -> new RenderModel(day, getSelectionType().down())));
+            handlers.add(dayLabel.addClickHandler(event -> fire(DayInMonthStrategy.this, new RenderModel(day, SelectionType.NONE))));
         });
     }
 
