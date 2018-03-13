@@ -1,6 +1,5 @@
 package com.github.joraclista.client.ui.widgets.checkbox;
 
-import com.github.joraclista.client.ui.widgets.checkbox.css.CheckBoxBundle;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
@@ -14,6 +13,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
+import static com.github.joraclista.client.ui.widgets.checkbox.css.CheckBoxBundle.BUNDLE;
+import static com.github.joraclista.client.ui.widgets.checkbox.css.CheckBoxBundle.Css;
 import static com.google.gwt.event.logical.shared.ValueChangeEvent.fire;
 
 /**
@@ -29,12 +30,12 @@ public class CheckBox extends Composite implements HasValueChangeHandlers<Boolea
     @UiField
     Label label;
 
-    private final CheckBoxBundle.Css css;
+    private final Css css;
     private boolean checked;
     private boolean enabled = true;
 
 
-    public CheckBox(CheckBoxBundle.Css css, String labelText) {
+    public CheckBox(Css css, String labelText) {
         initWidget(ourUiBinder.createAndBindUi(this));
         this.css = css;
         css.ensureInjected();
@@ -53,18 +54,18 @@ public class CheckBox extends Composite implements HasValueChangeHandlers<Boolea
         setChecked(false);
     }
 
-    public CheckBox(CheckBoxBundle.Css css) {
+    public CheckBox(Css css) {
         this(css, "");
     }
 
     public CheckBox() {
-        this(CheckBoxBundle.BUNDLE.css());
+        this(BUNDLE.css());
     }
 
     public CheckBox(String label) {
-        this(CheckBoxBundle.BUNDLE.css(), label);
+        this(BUNDLE.css(), label);
     }
-    private void applyStyles(CheckBoxBundle.Css css) {
+    private void applyStyles(Css css) {
         addStyleName(css.panel());
         label.addStyleName(css.check());
         label.addStyleName(css.label());

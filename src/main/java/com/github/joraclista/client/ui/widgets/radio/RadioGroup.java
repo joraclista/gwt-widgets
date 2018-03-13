@@ -1,6 +1,5 @@
 package com.github.joraclista.client.ui.widgets.radio;
 
-import com.github.joraclista.client.ui.widgets.radio.css.RadioButtonBundle;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -12,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.github.joraclista.client.ui.widgets.radio.css.RadioButtonBundle.BUNDLE;
+import static com.github.joraclista.client.ui.widgets.radio.css.RadioButtonBundle.Css;
 import static com.google.gwt.event.logical.shared.ValueChangeEvent.fire;
 import static java.util.Optional.ofNullable;
 
@@ -20,19 +21,19 @@ import static java.util.Optional.ofNullable;
  * version 1.0.
  */
 public class RadioGroup implements HasValueChangeHandlers<String> {
-    private final RadioButtonBundle.Css css;
+    private final Css css;
 
     private HandlerManager handlerManager;
     private List<RadioButton> radios = new ArrayList<>();
     private RadioButton checked;
 
-    public RadioGroup(RadioButtonBundle.Css css) {
+    public RadioGroup(Css css) {
         this.css = css;
         css.ensureInjected();
     }
 
     public RadioGroup() {
-        this(RadioButtonBundle.BUNDLE.css());
+        this(BUNDLE.css());
     }
 
     public RadioButton createButton(String label, boolean checked) {
