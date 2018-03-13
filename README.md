@@ -3,6 +3,29 @@ Additional GWT widgets with showcase
 
 # Usage
 
+## Code Snippets 
+<img src="/pics/snippet.png" alt="screenshot" title="screenshot"  height="340" />
+
+                        
+```java
+  CodeSnippet snippet = new CodeSnippet(SnippetsBundle.BUNDLE.snippet2().getText()) // basic usage : only source code text is provided. 
+  //By default dark theme is used for syntax highlight;
+ ```
+                        
+```java
+  CodeSnippet snippet = new CodeSnippet(SnippetsBundle.BUNDLE.snippet1().getText(), SnippetsBundle.BUNDLE.darkCss()) // specify source code text and css
+                .withSnippetName("Code Listing in Dark Scheme with line numbers and copy button #1") //specify code snippet title if necessary
+                .withLineNumbersEnabled(true) // configure line numbers support
+                .withCodeCopyButtonEnabled(true) // display 'copy to clipboard' button
+```
+
+```java
+  // specify another syntax highlight theme via css
+  CodeSnippet snippet = new CodeSnippet(SnippetsBundle.BUNDLE.snippet2().getText(), SnippetsBundle.BUNDLE.lightCss()) 
+                        .withSnippetName("Code Listing Light Scheme #2")));
+```
+
+
 ## Checkboxes
 <img src="/pics/checkboxes.png" alt="screenshot" title="screenshot"  height="140" />
 
