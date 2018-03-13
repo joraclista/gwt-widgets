@@ -1,6 +1,6 @@
 package com.github.joraclista.client.ui.widgets.tocPanel;
 
-import com.github.joraclista.client.ui.widgets.WidgetsGroup;
+import com.github.joraclista.client.ui.widgets.tocPanel.css.TocCss;
 import com.github.joraclista.client.ui.widgets.tocPanel.css.TocPanelBundle;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
@@ -28,7 +28,7 @@ public class TocPanel extends Composite {
 
     private static long ID = 0;
 
-    private final TocPanelBundle.Css css;
+    private final TocCss css;
     private Map<String, IsWidget> anchors = new HashMap<>();
 
     @UiField
@@ -45,7 +45,7 @@ public class TocPanel extends Composite {
         this(TocPanelBundle.BUNDLE.css());
     }
 
-    public TocPanel(TocPanelBundle.Css css) {
+    public TocPanel(TocCss css) {
         initWidget(ourUiBinder.createAndBindUi(this));
         css.ensureInjected();
         this.css = css;

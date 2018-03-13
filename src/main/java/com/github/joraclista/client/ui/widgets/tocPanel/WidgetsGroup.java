@@ -1,4 +1,4 @@
-package com.github.joraclista.client.ui.widgets;
+package com.github.joraclista.client.ui.widgets.tocPanel;
 
 import com.github.joraclista.client.ui.widgets.tocPanel.css.GroupCss;
 import com.github.joraclista.client.ui.widgets.tocPanel.css.TocPanelBundle;
