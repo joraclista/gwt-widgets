@@ -1,5 +1,6 @@
 package com.github.joraclista.client.ui.widgets.checkbox;
 
+import com.github.joraclista.client.ui.widgets.checkbox.css.CheckBoxBundle;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
@@ -24,8 +25,7 @@ public class CheckBox extends Composite implements HasValueChangeHandlers<Boolea
     }
 
     private static BoxUiBinder ourUiBinder = GWT.create(BoxUiBinder.class);
-    @UiField
-    Label check;
+
     @UiField
     Label label;
 
@@ -66,13 +66,17 @@ public class CheckBox extends Composite implements HasValueChangeHandlers<Boolea
     }
     private void applyStyles(CheckBoxBundle.Css css) {
         addStyleName(css.panel());
-        check.addStyleName(css.check());
+        label.addStyleName(css.check());
         label.addStyleName(css.label());
     }
 
     public CheckBox withLabel(String label) {
         setLabel(label);
         return this;
+    }
+
+    public String getLabel() {
+        return label.getText();
     }
 
     public CheckBox withChecked(boolean value) {
@@ -88,6 +92,7 @@ public class CheckBox extends Composite implements HasValueChangeHandlers<Boolea
     public void setChecked(boolean checked) {
         this.checked = checked;
         setStyleName(css.checked(), checked);
+        setStyleName(css.unchecked(), !checked);
     }
 
     public boolean isEnabled() {

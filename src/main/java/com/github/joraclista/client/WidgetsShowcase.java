@@ -1,7 +1,7 @@
 package com.github.joraclista.client;
 
+import com.github.joraclista.client.ui.CheckboxesPanel;
 import com.github.joraclista.client.ui.widgets.calendar.Calendar;
-import com.github.joraclista.client.ui.widgets.checkbox.CheckBox;
 import com.github.joraclista.client.ui.widgets.contact.Contact;
 import com.github.joraclista.client.ui.widgets.contact.ContactType;
 import com.github.joraclista.client.ui.widgets.contact.CvContact;
@@ -56,11 +56,7 @@ private TocPanel tocPanel;
     }
 
     private void configureCheckBoxWidgets() {
-        tocPanel.addWidget("Check Boxes", asList(
-                new CheckBox("Milk"),
-                new CheckBox("Chocolate"),
-                new CheckBox("Meat").withEnabled(false).withChecked(true),
-                new CheckBox("Bread")));
+       tocPanel.addWidget("Check Boxes", asList(new CheckboxesPanel()));
     }
 
     private void configurePopupsWidgets() {

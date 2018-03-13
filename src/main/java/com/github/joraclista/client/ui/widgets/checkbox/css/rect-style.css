@@ -2,28 +2,26 @@
     display: flex;
     flex-direction: row;
     cursor: pointer;
+    margin: 5px;
 }
 
-.check {
-    padding: 4px;
-    background: #4DD0E1;
-    /*border: 1px solid #03A9F4;*/
+
+.check:before {
+    content: "";
+    height: 14px;
+    width: 14px;
     display: flex;
     align-self: center;
+    margin-right: 15px;
+    box-sizing: border-box;
 }
 
-.check:after {
-    content: "\f00c";
-    font-family: 'Font Awesome 5 Solid';
-    color: white;
-    opacity: 0.2;
-    font-size: 10px;
+.checked .check:before  {
+    background: #D32F2F;
 }
-
-.checked .check:after  {
-    opacity: 1;
+.unchecked .check:before  {
+    background: #B0BEC5;
 }
-
 .label {
     padding-left: 5px;
     display: flex;
@@ -31,7 +29,7 @@
     color: #546E7A;
 }
 
-.disabled .check  {
+.disabled .check:before  {
     opacity: 0.2;
 }
 .disabled .label  {
