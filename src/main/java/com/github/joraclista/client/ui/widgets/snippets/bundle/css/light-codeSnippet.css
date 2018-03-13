@@ -47,17 +47,23 @@
 .line {
     display: inline-block;
 }
+.code .line:first-child {
+    float: left;
+}
+
 .string {
     color: #673ab7;
 }
 
-
-.punct,
 .keyword,
-.modifier,
-.annotation {
+.modifier {
     color: #1976D2;
 }
+.punct,
+.annotation {
+    color: #E91E63;
+}
+
 .capital {
     color: #BA68C8;
 }

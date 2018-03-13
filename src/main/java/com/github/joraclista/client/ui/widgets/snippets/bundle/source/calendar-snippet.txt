@@ -10,7 +10,7 @@ import com.google.gwt.resources.client.TextResource;
  * version 1.0.
  */
 public interface SnippetsBundle extends ClientBundle {
-
+    //TODO: this is comment
     SnippetsBundle BUNDLE = GWT.create(SnippetsBundle.class);
 
     interface DarkCss extends CodeSnippetCss {}

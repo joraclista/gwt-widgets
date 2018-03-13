@@ -35,7 +35,7 @@ public class WidgetsGroup extends Composite {
     public void setHeader(String header) {
         this.header.setText(header);
     }
-    //TODO: fix
+    //TODO: this is comment
     public void addWidgets(List<IsWidget> widgets) {
         ofNullable(widgets)
                 .ifPresent(widgetsList -> widgetsList.forEach(widget -> panel.add(widget)));

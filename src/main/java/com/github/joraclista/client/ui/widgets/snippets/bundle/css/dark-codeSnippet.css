@@ -48,6 +48,9 @@
 .line {
     display: inline-block;
 }
+.code .line:first-child {
+    float: left;
+}
  .string {
     color: #8bc34a;
 }
