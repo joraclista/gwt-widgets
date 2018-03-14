@@ -66,3 +66,11 @@ just type ```mvn clean package```
     
   radioGroup.addValueChangeHandler(event -> Window.alert("Selected: " + event.getValue())); // add handler
 ```
+
+## Calendar
+<img src="/pics/calendar.png" alt="screenshot" title="screenshot"  height="200" />
+
+```java
+  Calendar calendar = new Calendar(); // basic usage. Also accepts css as constructor param
+  calendar.addValueChangeHandler(event -> Window.alert("Selected: " + event.getValue())); // add handler
+```
