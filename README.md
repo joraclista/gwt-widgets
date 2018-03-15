@@ -93,3 +93,27 @@ just type ```mvn clean package```
                 .withPopupCloseOnBackgroundClick(true) // if true - popup can be closed via background click
                 .show();
 ```
+
+## TOC Panel
+<img src="/pics/toc-horizontal.png" alt="screenshot" title="screenshot"  height="200" />
+
+```java
+  TocPanel tocPanel = new TocPanel(); // basic usage. Also accepts css as constructor param
+  
+  TocPanel tocPanel2 = new TocPanel()
+      .withLayout(Layout.VERTICAL) // toc panel with vertical layout. Horizontal is default one
+      .withHeaderNumbersEnabled(true); // enable header numbers in toc/content (false by default)
+  
+  //adding single widget
+  tocPanel.addWidget("History", new Label("Android is a mobile operating system developed by Google"));
+  
+  //adding multiple widgets
+  tocPanel.addWidgets("History", Arrays.asList(
+                new Label("Label1"),
+                new Label("Label2"),
+                new Label("Label3"),
+                new FlowPanel(),
+                new VerticalPanel()
+                )
+        ); 
+```
