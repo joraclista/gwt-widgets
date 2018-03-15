@@ -1,5 +1,6 @@
 package com.github.joraclista.client.ui.showcase;
 
+import com.github.joraclista.client.ui.common.css.CommonBundle;
 import com.github.joraclista.client.ui.widgets.radio.RadioGroup;
 import com.github.joraclista.client.ui.widgets.radio.css.RadioButtonBundle;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -9,6 +10,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import java.util.List;
 
+import static com.github.joraclista.client.ui.common.css.StyleUtils.withStyleNames;
 import static java.util.Arrays.asList;
 
 /**
@@ -16,6 +18,12 @@ import static java.util.Arrays.asList;
  * version 1.0.
  */
 public class RadioPanel extends FlowPanel {
+
+    private CommonBundle.Css css = CommonBundle.BUNDLE.css();
+
+    {
+        css.ensureInjected();
+    }
 
     public RadioPanel() {
         List<String> labels = asList("Milk", "Chocolate", "Meat", "Bread");
@@ -34,7 +42,7 @@ public class RadioPanel extends FlowPanel {
         labels.stream().map(label -> radioGroup.createButton(label, true))
                 .forEach(cb -> vp.add(cb));
 
-        Label groupChecked = new Label("Selected: " + radioGroup.getChecked().map(rb -> rb.getLabel()).orElse("none"));
+        Label groupChecked = withStyleNames(new Label("Selected: " + radioGroup.getChecked().map(rb -> rb.getLabel()).orElse("none")), css.label());
 
         vp.add(groupChecked);
 

@@ -8,9 +8,12 @@ import com.google.gwt.resources.client.CssResource;
  */
 public interface GroupCss extends CssResource {
 
-    String header();
+    @ClassName("group-header-label")
+    String groupHeaderLabel();
 
-    String main();
+    @ClassName("group")
+    String group();
 
-    String panel();
+    @ClassName("group-panel")
+    String groupPanel();
 }

@@ -14,6 +14,4 @@ public interface TocPanelBundle extends ClientBundle {
     @Source("toc.css")
     TocCss css();
 
-    @Source("group.css")
-    GroupCss groupCss();
 }

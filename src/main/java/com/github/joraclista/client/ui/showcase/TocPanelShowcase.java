@@ -1,11 +1,16 @@
 package com.github.joraclista.client.ui.showcase;
 
 import com.github.joraclista.client.ui.common.css.CommonBundle;
+import com.github.joraclista.client.ui.widgets.radio.RadioButton;
 import com.github.joraclista.client.ui.widgets.radio.RadioGroup;
 import com.github.joraclista.client.ui.widgets.tocPanel.Layout;
 import com.github.joraclista.client.ui.widgets.tocPanel.TocPanel;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+
+import java.util.List;
+import java.util.function.BiFunction;
 
 import static com.github.joraclista.client.ui.common.css.StyleUtils.addStyleNames;
 import static com.github.joraclista.client.ui.common.css.StyleUtils.withStyleNames;
@@ -17,28 +22,49 @@ import static java.util.Arrays.asList;
  */
 public class TocPanelShowcase extends FlowPanel {
 
-    public TocPanelShowcase() {
-        CommonBundle.Css css = CommonBundle.BUNDLE.css();
+    private CommonBundle.Css css = CommonBundle.BUNDLE.css();
+
+    {
         css.ensureInjected();
+    }
 
-        addStyleNames(this, css.flex(), css.flexColumn());
-
-        TocPanel tocPanel = new TocPanel();
-        FlowPanel radioPanel = withStyleNames(new FlowPanel(), css.flex(), css.flexRow());
-        radioPanel.add(withStyleNames(new Label("Layout : "), css.label()));
+    void configureRadioPanel(String label, List<String> radioLabels, BiFunction<RadioGroup, String, RadioButton> mapper, ValueChangeHandler<String> onValueChangeHandler) {
+        FlowPanel radioPanel = withStyleNames(new FlowPanel(), css.flex(), css.flexRow(), css.vPadding10());
+        radioPanel.add(withStyleNames(new Label(label), css.label()));
         add(radioPanel);
-        add(tocPanel);
 
 
         RadioGroup radioGroup = new RadioGroup();
 
-        asList("Horizontal Layout", "Vertical Layout").stream()
-                .map(label -> radioGroup.createButton(label, "Horizontal Layout".equalsIgnoreCase(label)))
+        radioLabels.stream()
+                .map(_label -> mapper.apply(radioGroup, _label))
                 .forEach(radioButton -> radioPanel.add(radioButton));
 
-        radioGroup.addValueChangeHandler(event -> tocPanel.withLayout("Horizontal Layout".equalsIgnoreCase(event.getValue())
-                ? Layout.HORIZONTAL
-                : Layout.VERTICAL));
+        radioGroup.addValueChangeHandler(onValueChangeHandler);
+    }
+
+    public TocPanelShowcase() {
+
+
+        addStyleNames(this, css.flex(), css.flexColumn());
+
+        TocPanel tocPanel = new TocPanel();
+
+        configureRadioPanel(
+                "Layout : ",
+                asList("Horizontal Layout", "Vertical Layout"),
+                (radioGroup, label) -> radioGroup.createButton(label, "Horizontal Layout".equalsIgnoreCase(label)),
+                event -> tocPanel.withLayout("Horizontal Layout".equalsIgnoreCase(event.getValue())
+                        ? Layout.HORIZONTAL
+                        : Layout.VERTICAL));
+        configureRadioPanel(
+                "Numbered headers : ",
+                asList("Yes", "No"),
+                (radioGroup, label) -> radioGroup.createButton(label, "No".equalsIgnoreCase(label)),
+                event -> tocPanel.withHeaderNumbersEnabled("Yes".equalsIgnoreCase(event.getValue())));
+
+        add(tocPanel);
+
 
 
         tocPanel.addWidget("History", new Label("Android is a mobile operating system developed by Google, " +

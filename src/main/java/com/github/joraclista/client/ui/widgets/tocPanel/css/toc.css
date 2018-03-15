@@ -4,12 +4,15 @@
     grid-template-columns: repeat(4, 1fr);
     overflow: hidden;
 }
+.numbered {
 
+}
 .toc {
     display: flex;
     flex-direction: column;
     color: #546e7a;
     width: 200px;
+    counter-reset: toc-headersnum;
 }
 
 .toc a {
@@ -17,15 +20,21 @@
     text-decoration: none;
     padding: 10px 2px;
     font-size: 15px;
+    counter-increment: toc-headersnum;
 }
 
 .toc a:before {
     content: "-";
 }
+.numbered .toc a:before {
+    content: counter(toc-headersnum) ".";
+    padding-right: 10px;
+}
 
 .content {
-
+    counter-reset: content-headersnum;
 }
+
 
 .tocContainer {
     border-right: 1px solid #cfd8dc;
@@ -54,4 +63,39 @@
     grid-column: 1;
     grid-row: 1;
 
+}
+
+.group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.group-header-label {
+    width: 100%;
+    background: #B0BEC5;
+    padding: 15px;
+    font-weight: bold;
+
+}
+
+.content .group {
+    counter-increment: content-headersnum;
+}
+
+.numbered  .content > .group >  .group-header-label:before {
+    content: counter(content-headersnum) ".";
+    padding-right: 10px;
+}
+
+.group-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.group-panel > div {
+    margin: 30px;
+    display: flex;
+    flex-grow: 0;
 }

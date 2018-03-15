@@ -1,5 +1,6 @@
 package com.github.joraclista.client.ui.widgets.tocPanel;
 
+import com.github.joraclista.client.ui.common.css.StyleUtils;
 import com.github.joraclista.client.ui.widgets.tocPanel.css.GroupCss;
 import com.github.joraclista.client.ui.widgets.tocPanel.css.TocPanelBundle;
 import com.google.gwt.core.client.GWT;
@@ -29,11 +30,15 @@ public class WidgetsGroup extends Composite {
     FlowPanel panel;
 
     public WidgetsGroup() {
-        this(TocPanelBundle.BUNDLE.groupCss(), "");
+        this(TocPanelBundle.BUNDLE.css(), "");
+    }
+
+    public WidgetsGroup(GroupCss css) {
+        this(css, "");
     }
 
     public WidgetsGroup(String header) {
-        this(TocPanelBundle.BUNDLE.groupCss(), header);
+        this(TocPanelBundle.BUNDLE.css(), header);
     }
 
     public WidgetsGroup(GroupCss css, String header) {
@@ -45,9 +50,9 @@ public class WidgetsGroup extends Composite {
     }
 
     private void applyStyles(GroupCss css) {
-        this.asWidget().addStyleName(css.main());
-        this.panel.addStyleName(css.panel());
-        this.header.addStyleName(css.header());
+        this.asWidget().addStyleName(css.group());
+        this.panel.addStyleName(css.groupPanel());
+        this.header.addStyleName(css.groupHeaderLabel());
     }
 
     public void setWidgets(List<IsWidget> widgets) {
@@ -62,6 +67,11 @@ public class WidgetsGroup extends Composite {
 
     public WidgetsGroup withHeader(String header) {
         this.header.setText(header);
+        return this;
+    }
+
+    public WidgetsGroup withHeaderStyleNames(String... styleNames) {
+        StyleUtils.addStyleNames(header, styleNames);
         return this;
     }
 

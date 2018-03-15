@@ -28,3 +28,15 @@
     padding: 10px 30px;
     cursor: pointer;
 }
+
+.v-padding-10 {
+    padding: 10px 0;
+}
+
+.h-padding-10 {
+    padding: 10px 0;
+}
+
+.padding-10 {
+    padding: 10px;
+}

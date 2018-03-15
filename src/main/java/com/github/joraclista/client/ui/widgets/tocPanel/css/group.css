@@ -1,9 +1,9 @@
-.main {
+.group {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
-.header {
+.group-header-label {
     width: 100%;
     background: #B0BEC5;
     padding: 15px;
@@ -11,14 +11,14 @@
     /*box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);*/
 
 }
-.panel {
+.group-panel {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     flex-wrap: wrap;
 }
 
-.panel > div {
+.group-panel > div {
     margin: 30px;
     display: flex;
     flex-grow: 0;

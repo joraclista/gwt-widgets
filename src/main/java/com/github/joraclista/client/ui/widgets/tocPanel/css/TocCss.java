@@ -1,12 +1,10 @@
 package com.github.joraclista.client.ui.widgets.tocPanel.css;
 
-import com.google.gwt.resources.client.CssResource;
-
 /**
  * Created by Alisa
  * version 1.0.
  */
-public interface TocCss extends CssResource {
+public interface TocCss extends GroupCss {
 
     String toc();
 
@@ -19,4 +17,6 @@ public interface TocCss extends CssResource {
     String horizontal();
 
     String vertical();
+
+    String numbered();
 }

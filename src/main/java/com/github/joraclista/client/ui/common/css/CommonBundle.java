@@ -31,6 +31,15 @@ public interface CommonBundle extends ClientBundle {
 
         @ClassName("flex-column-reverse")
         String flexColumnReverse();
+
+        @ClassName("padding-10")
+        String padding10();
+
+        @ClassName("v-padding-10")
+        String vPadding10();
+
+        @ClassName("h-padding-10")
+        String hPadding10();
     }
 
     @Source("common.css")

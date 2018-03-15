@@ -31,7 +31,7 @@
     box-sizing: border-box;
 }
 
-.pre{
+.pre {
     counter-reset: linenum;
 }
 .numbered .code span.line {

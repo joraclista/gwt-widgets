@@ -83,12 +83,17 @@ public class TocPanel extends Composite {
         return this;
     }
 
+    public TocPanel withHeaderNumbersEnabled(boolean enabled) {
+        this.asWidget().setStyleName(css.numbered(), enabled);
+        return this;
+    }
+
     protected IsWidget renderTocLabel(String header, String url) {
         return new Anchor(header, HasDirection.Direction.DEFAULT, url);
     }
 
     protected IsWidget renderWidgetGroup(String header, List<IsWidget> widgets) {
-        return new WidgetsGroup()
+        return new WidgetsGroup(css)
                 .withHeader(header)
                 .withWidgets(widgets);
     }
