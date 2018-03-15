@@ -59,23 +59,23 @@ private TocPanel tocPanel;
     }
 
     private void configureTocWidgets() {
-        tocPanel.addWidget("TOC Panel", asList(new TocPanelShowcase()));
+        tocPanel.addWidget("TOC Panel", new TocPanelShowcase());
     }
 
     private void configureRadioButtonWidgets() {
-        tocPanel.addWidget("Radio Buttons", asList(new RadioPanel()));
+        tocPanel.addWidget("Radio Buttons", new RadioPanel());
     }
 
     private void configureCheckBoxWidgets() {
-       tocPanel.addWidget("Check Boxes", asList(new CheckboxesPanel()));
+       tocPanel.addWidget("Check Boxes", new CheckboxesPanel());
     }
 
     private void configurePopupsWidgets() {
-        tocPanel.addWidget("Popups", asList(new PopupConfig()));
+        tocPanel.addWidget("Popups", new PopupConfig());
     }
 
     private void configureNotificationsWidgets() {
-        tocPanel.addWidget("Notifications", asList(
+        tocPanel.addWidgets("Notifications", asList(
                 new Notification("This is warning")
                         .withType(NotificationType.WARNING)
                         .withArrowPosition(ArrowPosition.TOP),
@@ -114,7 +114,7 @@ private TocPanel tocPanel;
                 setImageUrl("https://media.gettyimages.com/photos/man-with-a-mustache-picture-id516040293");
             }
         });
-        tocPanel.addWidget("Business Cards", asList(contact, cv));
+        tocPanel.addWidgets("Business Cards", asList(contact, cv));
     }
 
     private void configureCalendarWidget() {
@@ -128,11 +128,11 @@ private TocPanel tocPanel;
                 .show());
 
 
-        tocPanel.addWidget("Calendars", asList(calendar));
+        tocPanel.addWidget("Calendars", calendar);
     }
 
     private void configureCodeSnippetWidget() {
-        tocPanel.addWidget("Code Snippets", asList(
+        tocPanel.addWidgets("Code Snippets", asList(
                 new CodeSnippet(SnippetsBundle.BUNDLE.snippet1().getText(), SnippetsBundle.BUNDLE.darkCss())
                 .withSnippetName("Code Listing in Dark Scheme with line numbers and copy button #1")
                 .withLineNumbersEnabled(true)

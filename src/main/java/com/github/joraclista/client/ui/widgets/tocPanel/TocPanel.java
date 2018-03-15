@@ -60,7 +60,7 @@ public class TocPanel extends Composite {
 
     }
 
-    public void addWidget(String header, List<IsWidget> widgets) {
+    public void addWidgets(String header, List<IsWidget> widgets) {
         IsWidget group = renderWidgetGroup(header, widgets);
         group.asWidget().getElement().setId("anchor-" + ID++);
         anchors.put(header, group);
@@ -70,7 +70,7 @@ public class TocPanel extends Composite {
     }
 
     public void addWidget(String header, IsWidget widget) {
-        addWidget(header, asList(widget));
+        addWidgets(header, asList(widget));
     }
 
     public TocPanel withLayout(Layout layout) {
