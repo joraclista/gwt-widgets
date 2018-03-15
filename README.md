@@ -1,6 +1,19 @@
 # gwt-widgets
 Additional GWT widgets with showcase
 
+
+### Build
+
+This is a regular maven project,
+just type ```mvn clean package```
+
+### Deploy
+
+  * Build with maven
+  * Deploy to tomcat/etc
+  * access http://yourHost:yourPort/warFileName  (as main html page is index.html, no need to specify it )
+  
+  
 # Usage
 
 ## Code Snippets 
@@ -52,4 +65,31 @@ Additional GWT widgets with showcase
     .forEach(radioButton -> vp.add(radioButton));
     
   radioGroup.addValueChangeHandler(event -> Window.alert("Selected: " + event.getValue())); // add handler
+```
+
+## Calendar
+<img src="/pics/calendar.png" alt="screenshot" title="screenshot"  height="200" />
+
+```java
+  Calendar calendar = new Calendar(); // basic usage. Also accepts css as constructor param
+  calendar.addValueChangeHandler(event -> Window.alert("Selected: " + event.getValue())); // add handler
+```
+
+## Notifications
+<img src="/pics/notifications.png" alt="screenshot" title="screenshot"  height="200" />
+
+```java
+  // basic usage. Creates notification panel with message, can be added to other panels
+  Notification notification = new Notification("This is warning")
+                        .withType(NotificationType.WARNING)
+                        .withArrowPosition(ArrowPosition.TOP); 
+  
+  // Shows notification in a popup
+  Notification notification2 = new Notification("INFO message")
+                .withType(NotificationType.INFO)
+                .withPopupPosition(Position.TOP_RIGHT)
+                .withArrowPosition(ArrowPosition.LEFT)
+                .withPopupCloseButtonVisibility(true) //show or not 'close' button
+                .withPopupCloseOnBackgroundClick(true) // if true - popup can be closed via background click
+                .show();
 ```
