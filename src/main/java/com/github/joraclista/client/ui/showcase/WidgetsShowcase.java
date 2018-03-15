@@ -52,8 +52,14 @@ private TocPanel tocPanel;
 
         configureRadioButtonWidgets();
 
+        configureTocWidgets();
+
         configureBusinessCardsWidgets();
 
+    }
+
+    private void configureTocWidgets() {
+        tocPanel.addWidget("TOC Panel", asList(new TocPanelShowcase()));
     }
 
     private void configureRadioButtonWidgets() {

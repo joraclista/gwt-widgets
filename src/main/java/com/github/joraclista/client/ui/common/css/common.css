@@ -1,0 +1,30 @@
+.flex {
+    display: flex;
+}
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-column-reverse {
+    flex-direction: column-reverse;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.label {
+    color: #607D8B;
+    padding: 5px;
+}
+
+.button {
+    background: #607D8B;
+    color: white;
+    padding: 10px 30px;
+    cursor: pointer;
+}

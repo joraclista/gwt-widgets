@@ -17,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.Arrays.asList;
+
 /**
  * Created by Alisa
  * version 1.0.
@@ -67,10 +69,17 @@ public class TocPanel extends Composite {
 
     }
 
+    public void addWidget(String header, IsWidget widget) {
+        addWidget(header, asList(widget));
+    }
+
     public TocPanel withLayout(Layout layout) {
         Layout _layout = layout == null ? Layout.HORIZONTAL : layout;
         Arrays.stream(Layout.values())
-                .forEach(layOut -> this.asWidget().setStyleName(layOut.style(css), _layout.equals(layOut)));
+                .forEach(layOut -> {
+                    boolean equals = _layout.equals(layOut);
+                    this.asWidget().setStyleName(layOut.style(css), equals);
+                });
         return this;
     }
 
