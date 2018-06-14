@@ -23,8 +23,6 @@ public interface BarChartBundle extends ClientBundle {
         @ClassName("bar-holder")
         String barHolder();
 
-        @ClassName("bar-container")
-        String barContainer();
 
         String defaultBg1();
         String defaultBg2();

@@ -11,20 +11,19 @@ import com.google.gwt.user.client.ui.Label;
 public class Bar extends FlowPanel {
 
     private Label label;
-    private FlowPanel barContainer;
     private Label bar;
 
     public Bar(BarChartBundle.Css css, String text, double height) {
         addStyleName(css.barHolder());
         add(label = new Label(text));
-        add(barContainer = new FlowPanel());
-        barContainer.add(bar = new Label());
+        add(bar = new Label());
         label.addStyleName(css.label());
         bar.addStyleName(css.bar());
-        barContainer.addStyleName(css.barContainer());
-        bar.setHeight(Math.abs(height) * 100 + "%");
+        getElement().getStyle().setProperty("height", "100%");
+        bar.getElement().getStyle().setProperty("height", Math.abs(height) * 100 + "%");
         bar.getElement().setAttribute("color", height < 0 ? "invalid" : "normal");
         if (height < 0) {
+            getElement().getStyle().setProperty("justifyContent", "flex-start");
             getElement().setAttribute("bar", "negative");
         }
     }
