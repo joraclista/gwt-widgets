@@ -68,7 +68,7 @@ just type ```mvn clean package```
 ```
 
 ## Bar Chart
-<img src="/pics/barchart.png" alt="screenshot" title="screenshot"  height="140" />
+<img src="/pics/barchart.png" alt="screenshot" title="screenshot"  height="350" />
 
 ```java
   // create chart
