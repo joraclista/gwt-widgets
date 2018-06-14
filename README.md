@@ -67,6 +67,31 @@ just type ```mvn clean package```
   radioGroup.addValueChangeHandler(event -> Window.alert("Selected: " + event.getValue())); // add handler
 ```
 
+## Bar Chart
+<img src="/pics/barchart.png" alt="screenshot" title="screenshot"  height="140" />
+
+```java
+  // create chart
+  BarChart barChart = new BarChart("Average Number of Students per Specialization");
+  // render data:
+  barChart.render(asList(new BarModel(88, "2012"),
+                new BarModel(98, "2013"),
+                new BarModel(85, "2014"),
+                new BarModel(77.5, "2015"),
+                new BarModel(64.4, "2016"),
+                new BarModel(55, "2017"))); 
+  //  Or specify other css : 
+  //  BarChart barChart = new BarChart("Total Income", BarChartBundle.BUNDLE.cssDiff());
+  ValueChangeHandler<BarModel> handler = event -> new Notification("Selected: " + event.getValue())
+                .withType(NotificationType.INFO)
+                .withPopupPosition(Position.CENTER)
+                .withArrowPosition(ArrowPosition.LEFT)
+                .withPopupCloseButtonVisibility(true)
+                .withPopupCloseOnBackgroundClick(true)
+                .show();
+  barChart.addValueChangeHandler(handler); // add bar click handler
+```
+
 ## Calendar
 <img src="/pics/calendar.png" alt="screenshot" title="screenshot"  height="200" />
 
