@@ -6,26 +6,26 @@ package com.github.joraclista.client.ui.widgets.barChart;
  */
 public class BarModel {
     private double value;
-    private String text;
+    private String legend;
 
-    public BarModel(double value, String text) {
+    public BarModel(double value, String legend) {
         this.value = value;
-        this.text = text;
+        this.legend = legend;
     }
 
     public double getValue() {
         return value;
     }
 
-    public String getText() {
-        return text;
+    public String getLegend() {
+        return legend;
     }
 
     @Override
     public String toString() {
         return "BarModel{" +
                 "value=" + value +
-                ", text='" + text + '\'' +
+                ", legend='" + legend + '\'' +
                 '}';
     }
 }

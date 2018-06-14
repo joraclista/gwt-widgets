@@ -29,6 +29,12 @@ public interface BarChartBundle extends ClientBundle {
         String invalidBg();
 
         String axis();
+
+        String legend();
+
+        String titleLabel();
+
+        String main();
     }
 
 

@@ -25,13 +25,19 @@ public class BarChart extends FlowPanel implements HasValueChangeHandlers<BarMod
         POSITIVE, NEGATIVE, MIXED
     }
 
+    private FlowPanel container;
+    private Label titleLabel;
     private Label axis;
     private ChartValues chartValues = ChartValues.POSITIVE;
 
-    public BarChart() {
-        addStyleName(CSS.container());
-        add(axis = new Label());
+    public BarChart(String title) {
+        addStyleName(CSS.main());
+        add(titleLabel = new Label(title));
+        add(container = new FlowPanel());
+        container.add(axis = new Label());
+        container.addStyleName(CSS.container());
         axis.addStyleName(CSS.axis());
+        titleLabel.addStyleName(CSS.titleLabel());
     }
 
     public void render(List<BarModel> model) {
@@ -41,12 +47,12 @@ public class BarChart extends FlowPanel implements HasValueChangeHandlers<BarMod
         chartValues = model.stream().mapToDouble(m -> m.getValue()).filter(v -> v >=0 ).count() == model.size()
                 ? ChartValues.POSITIVE :
                 (model.stream().mapToDouble(m -> m.getValue()).filter(v -> v <=0 ).count() == 0 ? ChartValues.NEGATIVE : ChartValues.MIXED);
-        getElement().setAttribute("chart", chartValues.name().toLowerCase());
+        container.getElement().setAttribute("chart", chartValues.name().toLowerCase());
         model.stream()
                 .forEach(m -> {
-                    Bar bar = new Bar(CSS, m.getText(), m.getValue() / max);
+                    Bar bar = new Bar(CSS, m, m.getValue() / max);
                     bar.addClickHandler(event -> ValueChangeEvent.fire(BarChart.this, m));
-                    BarChart.this.add(bar);
+                    container.add(bar);
                     bar.setWidth(100 / model.size() + "%");
                 });
     }

@@ -150,32 +150,31 @@ private TocPanel tocPanel;
     }
 
     private void configureBarWidget() {
-        BarChart barChart1 = new BarChart();
-        BarChart barChart2 = new BarChart();
-        BarChart barChart3 = new BarChart();
+        BarChart barChart1 = new BarChart("Average Number of Students per Specialization");
+        BarChart barChart2 = new BarChart("Total Income");
+        BarChart barChart3 = new BarChart("Headcount changes");
         tocPanel.addWidgets("Bar Chart", asList(
                 barChart1, barChart2, barChart3));
-        barChart1.render(Arrays.asList(new BarModel(10, "10"),
-                new BarModel(98, "98"),
-                new BarModel(5, "5"),
-                new BarModel(37.5, "37.5"),
-                new BarModel(14.4, "14.4"),
-                new BarModel(25, "25")));
+        barChart1.render(Arrays.asList(new BarModel(88, "2012"),
+                new BarModel(98, "2013"),
+                new BarModel(85, "2014"),
+                new BarModel(77.5, "2015"),
+                new BarModel(64.4, "2016"),
+                new BarModel(55, "2017")));
 
-        barChart2.render(Arrays.asList(new BarModel(10, "10"),
-                new BarModel(98, "98"),
-                new BarModel(5, "5"),
-                new BarModel(-37.5, "-37.5"),
-                new BarModel(-14.4, "-14.4"),
-                new BarModel(-25, "-25")));
+        barChart2.render(Arrays.asList(new BarModel(10, "Jan 2018"),
+                new BarModel(98, "Feb 2018"),
+                new BarModel(5, "Mar 2018"),
+                new BarModel(-37.5, "Apr 2018"),
+                new BarModel(-14.4, "May 2018"),
+                new BarModel(-25, "June 2018")));
 
-        barChart3.render(Arrays.asList(new BarModel(-10, "-10"),
-                new BarModel(-0, "0"),
-                new BarModel(-4.4, "-4.4"),
-                new BarModel(-77.7, "-77.7"),
-                new BarModel(-10, "-10"),
-                new BarModel(-98, "-98"),
-                new BarModel(-25.6, "-25.6")));
+        barChart3.render(Arrays.asList(new BarModel(-10, "3Q 2017"),
+                new BarModel(-0, "4Q 2017"),
+                new BarModel(-4.4, "1Q 2018"),
+                new BarModel(-77.7, "2Q 2018"),
+                new BarModel(-10, "3Q 2018"),
+                new BarModel(-98, "4Q 2018")));
         ValueChangeHandler<BarModel> handler = event -> new Notification("Selected: " + event.getValue())
                 .withType(NotificationType.INFO)
                 .withPopupPosition(Position.CENTER)
