@@ -1,0 +1,94 @@
+@def defaultBg1 #009688;
+@def defaultBg2 #4dd0e1;
+@def invalidBg #d32f2f;
+
+
+.bar-holder {
+    display: flex;
+    flex-direction: column;
+    padding: 0 5px;
+    height: 100%;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.container[chart='mixed'] .bar-holder {
+    height: 50%;
+}
+.container[chart='mixed'] .bar-holder[bar='negative'] {
+    top: 50%;
+}
+.container[chart='mixed'] .bar-container {
+    justify-content: flex-end;
+}
+.container[chart='mixed'] .bar-holder[bar='negative'] .bar-container{
+    justify-content: baseline;
+}
+
+.bar {
+    display: flex;
+}
+.bar[color='invalid'] {
+    background: invalidBg;
+}
+.bar[color='normal'] {
+    background: defaultBg1;
+}
+.bar-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+.container[chart='positive'] .bar-container {
+    justify-content: flex-end;
+}
+.container[chart='negative'] .bar-container {
+    justify-content: baseline;
+}
+
+
+
+.label {
+    color: black;
+    font-size: 10px;
+    align-self: center;
+    position: absolute;
+
+}
+.container[chart='positive'] .label {
+    bottom: -20px;
+}
+.container[chart='negative'] .label {
+    top: -20px;
+}
+.container[chart='mixed'] .label {
+    top: 55%;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+    width: 100%;
+    position: relative;
+
+}
+.axis {
+    border-bottom: black 1px solid;
+    position: absolute;
+    width: 100%;
+
+}
+
+.container[chart='positive'] .axis {
+    top: 100%;
+}
+
+.container[chart='negative'] .axis {
+    top: 0%;
+}
+
+.container[chart='mixed'] .axis {
+    top: 50%;
+}
+

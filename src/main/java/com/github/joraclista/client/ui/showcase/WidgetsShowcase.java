@@ -1,5 +1,7 @@
 package com.github.joraclista.client.ui.showcase;
 
+import com.github.joraclista.client.ui.widgets.barChart.BarChart;
+import com.github.joraclista.client.ui.widgets.barChart.BarModel;
 import com.github.joraclista.client.ui.widgets.calendar.Calendar;
 import com.github.joraclista.client.ui.widgets.contact.Contact;
 import com.github.joraclista.client.ui.widgets.contact.ContactType;
@@ -16,6 +18,8 @@ import com.github.joraclista.client.ui.widgets.tocPanel.TocPanel;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
+
+import java.util.Arrays;
 
 import static com.google.gwt.i18n.client.DateTimeFormat.getFormat;
 import static java.util.Arrays.asList;
@@ -51,6 +55,8 @@ private TocPanel tocPanel;
         configureCheckBoxWidgets();
 
         configureRadioButtonWidgets();
+
+        configureBarWidget();
 
         configureTocWidgets();
 
@@ -140,6 +146,31 @@ private TocPanel tocPanel;
 
                 new CodeSnippet(SnippetsBundle.BUNDLE.snippet2().getText(), SnippetsBundle.BUNDLE.lightCss())
                         .withSnippetName("Code Listing Light Scheme #2")));
+    }
+
+    private void configureBarWidget() {
+        BarChart barChart1 = new BarChart();
+        BarChart barChart2 = new BarChart();
+        BarChart barChart3 = new BarChart();
+        tocPanel.addWidgets("Bar Chart", asList(
+                barChart1, barChart2, barChart3));
+        barChart1.render(Arrays.asList(new BarModel(10, "10"),
+                new BarModel(98, "98"),
+                new BarModel(5, "5"),
+                new BarModel(37.5, "37.5"),
+                new BarModel(14.4, "14.4"),
+                new BarModel(25, "25")));
+
+        barChart2.render(Arrays.asList(new BarModel(10, "10"),
+                new BarModel(98, "98"),
+                new BarModel(5, "5"),
+                new BarModel(-37.5, "-37.5"),
+                new BarModel(-14.4, "-14.4"),
+                new BarModel(-25, "-25")));
+
+        barChart3.render(Arrays.asList(new BarModel(-10, "-10"),
+                new BarModel(-98, "-98"),
+                new BarModel(-25, "-25")));
     }
 
     private void addToRoot(IsWidget widget) {
