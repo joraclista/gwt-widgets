@@ -7,6 +7,9 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
+import static com.github.joraclista.client.ui.common.css.StyleUtils.setAttribute;
+import static com.github.joraclista.client.ui.common.css.StyleUtils.setStyleProperty;
+
 /**
  * Created by Alisa
  * version 1.0.
@@ -18,24 +21,30 @@ public class Bar extends FlowPanel implements HasClickHandlers {
     private Label bar;
 
     public Bar(BarChartBundle.Css css, BarModel model, double height) {
-        addStyleName(css.barHolder());
+
         add(label = new Label(model.getValue() + ""));
         add(bar = new Label());
         add(legend = new Label(model.getLegend()));
+        addStyles(css);
+
+        setStyleProperty(bar, "height", Math.abs(height) * 100 + "%");
+        setAttribute(bar, "color", height < 0 ? "invalid" : "normal");
+
+        if (height <= 0) {
+            setStyleProperty(this, "justifyContent", "flex-start");
+            setAttribute(this, "bar", "negative");
+            setStyleProperty(label, "top", "calc(" + Math.abs(height) * 100 + "% + 10px)");
+        } else {
+            setStyleProperty(label, "bottom", "calc(" + Math.abs(height) * 100 + "% + 10px)");
+        }
+
+    }
+
+    private void addStyles(BarChartBundle.Css css) {
+        addStyleName(css.barHolder());
         label.addStyleName(css.label());
         legend.addStyleName(css.legend());
         bar.addStyleName(css.bar());
-        getElement().getStyle().setProperty("height", "100%");
-        bar.getElement().getStyle().setProperty("height", Math.abs(height) * 100 + "%");
-        bar.getElement().setAttribute("color", height < 0 ? "invalid" : "normal");
-        if (height <= 0) {
-            getElement().getStyle().setProperty("justifyContent", "flex-start");
-            getElement().setAttribute("bar", "negative");
-            label.getElement().getStyle().setProperty("top", "calc(" + Math.abs(height) * 100 + "% + 10px)");
-        } else {
-            label.getElement().getStyle().setProperty("bottom", "calc(" + Math.abs(height) * 100 + "% + 10px)");
-        }
-
     }
 
     @Override

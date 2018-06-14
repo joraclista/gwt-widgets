@@ -37,8 +37,12 @@ public interface BarChartBundle extends ClientBundle {
         String main();
     }
 
+    interface ChartCss extends Css {}
+    interface OtherChartCss extends Css {}
 
     @Source("style.css")
-    Css css();
+    ChartCss css();
 
+    @Source("style-diff.css")
+    OtherChartCss cssDiff();
 }

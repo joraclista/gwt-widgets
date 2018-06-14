@@ -2,6 +2,7 @@ package com.github.joraclista.client.ui.showcase;
 
 import com.github.joraclista.client.ui.widgets.barChart.BarChart;
 import com.github.joraclista.client.ui.widgets.barChart.BarModel;
+import com.github.joraclista.client.ui.widgets.barChart.css.BarChartBundle;
 import com.github.joraclista.client.ui.widgets.calendar.Calendar;
 import com.github.joraclista.client.ui.widgets.contact.Contact;
 import com.github.joraclista.client.ui.widgets.contact.ContactType;
@@ -19,8 +20,6 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
-
-import java.util.Arrays;
 
 import static com.google.gwt.i18n.client.DateTimeFormat.getFormat;
 import static java.util.Arrays.asList;
@@ -151,25 +150,25 @@ private TocPanel tocPanel;
 
     private void configureBarWidget() {
         BarChart barChart1 = new BarChart("Average Number of Students per Specialization");
-        BarChart barChart2 = new BarChart("Total Income");
+        BarChart barChart2 = new BarChart("Total Income", BarChartBundle.BUNDLE.cssDiff());
         BarChart barChart3 = new BarChart("Headcount changes");
         tocPanel.addWidgets("Bar Chart", asList(
                 barChart1, barChart2, barChart3));
-        barChart1.render(Arrays.asList(new BarModel(88, "2012"),
+        barChart1.render(asList(new BarModel(88, "2012"),
                 new BarModel(98, "2013"),
                 new BarModel(85, "2014"),
                 new BarModel(77.5, "2015"),
                 new BarModel(64.4, "2016"),
                 new BarModel(55, "2017")));
 
-        barChart2.render(Arrays.asList(new BarModel(10, "Jan 2018"),
+        barChart2.render(asList(new BarModel(10, "Jan 2018"),
                 new BarModel(98, "Feb 2018"),
                 new BarModel(5, "Mar 2018"),
                 new BarModel(-37.5, "Apr 2018"),
                 new BarModel(-14.4, "May 2018"),
                 new BarModel(-25, "June 2018")));
 
-        barChart3.render(Arrays.asList(new BarModel(-10, "3Q 2017"),
+        barChart3.render(asList(new BarModel(-10, "3Q 2017"),
                 new BarModel(-0, "4Q 2017"),
                 new BarModel(-4.4, "1Q 2018"),
                 new BarModel(-77.7, "2Q 2018"),

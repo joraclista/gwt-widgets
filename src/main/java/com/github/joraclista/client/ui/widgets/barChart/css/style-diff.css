@@ -1,0 +1,97 @@
+@def defaultBg1 #009688;
+@def defaultBg2 #4dd0e1;
+@def invalidBg #d32f2f;
+
+
+.bar-holder {
+    display: flex;
+    flex-direction: column;
+    padding: 0 5px;
+    height: 100%;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.container[chart='mixed'] .bar-holder {
+    height: 50% !important;
+}
+.container[chart='mixed'] .bar-holder[bar='negative'] {
+    top: 50%;
+}
+
+.bar {
+    display: flex;
+}
+.bar[color='invalid'] {
+    background: invalidBg;
+}
+.bar[color='normal'] {
+    background: defaultBg2;
+}
+
+
+.label {
+    color: #546e7a;
+    font-size: 14px;
+    align-self: center;
+    position: absolute;
+
+}
+.legend {
+    color: #546e7a;
+    font-size: 14px;
+    align-self: center;
+    position: absolute;
+}
+.container[chart='positive'] .legend {
+    bottom: -20px;
+}
+.container[chart='negative'] .legend {
+    top: -20px;
+}
+.container[chart='mixed'] div[bar='negative'] .legend {
+    top: -20px;
+}
+.container[chart='mixed'] .legend {
+    bottom: -20px;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+    width: 100%;
+    position: relative;
+
+}
+.axis {
+    border-bottom: black 1px solid;
+    position: absolute;
+    width: 100%;
+
+}
+
+.container[chart='positive'] .axis {
+    top: 100%;
+}
+
+.container[chart='negative'] .axis {
+    top: 0%;
+}
+
+.container[chart='mixed'] .axis {
+    top: 50%;
+}
+
+.titleLabel {
+    color: #546e7a;
+    font-size: 18px;
+    align-self: center;
+    margin-bottom: 50px;
+}
+
+.main {
+    flex-direction: column;
+    width: 100%;
+    display: flex;
+    height: 220px;
+}

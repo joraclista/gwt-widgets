@@ -49,4 +49,14 @@ public final class StyleUtils {
         removeStyleNames(widget, styles);
         return widget;
     }
+
+    public static <T extends IsWidget> T setStyleProperty(T widget, String property, String value) {
+        widget.asWidget().getElement().getStyle().setProperty(property, value);
+        return widget;
+    }
+
+    public static <T extends IsWidget> T setAttribute(T widget, String attribute, String value) {
+        widget.asWidget().getElement().setAttribute(attribute, value);
+        return widget;
+    }
 }

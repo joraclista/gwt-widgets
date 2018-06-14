@@ -16,28 +16,30 @@ import java.util.List;
  */
 public class BarChart extends FlowPanel implements HasValueChangeHandlers<BarModel> {
 
-    private static final BarChartBundle.Css CSS  = BarChartBundle.BUNDLE.css();
-    static {
-        CSS.ensureInjected();
-    }
-
     enum ChartValues {
         POSITIVE, NEGATIVE, MIXED
     }
-
+    private BarChartBundle.Css css;
     private FlowPanel container;
     private Label titleLabel;
     private Label axis;
     private ChartValues chartValues = ChartValues.POSITIVE;
 
     public BarChart(String title) {
-        addStyleName(CSS.main());
+        this(title, BarChartBundle.BUNDLE.css());
+    }
+
+    public BarChart(String title, BarChartBundle.Css css) {
+        this.css = css;
+        this.css.ensureInjected();
         add(titleLabel = new Label(title));
         add(container = new FlowPanel());
         container.add(axis = new Label());
-        container.addStyleName(CSS.container());
-        axis.addStyleName(CSS.axis());
-        titleLabel.addStyleName(CSS.titleLabel());
+
+        addStyleName(css.main());
+        container.addStyleName(css.container());
+        axis.addStyleName(css.axis());
+        titleLabel.addStyleName(css.titleLabel());
     }
 
     public void render(List<BarModel> model) {
@@ -50,7 +52,7 @@ public class BarChart extends FlowPanel implements HasValueChangeHandlers<BarMod
         container.getElement().setAttribute("chart", chartValues.name().toLowerCase());
         model.stream()
                 .forEach(m -> {
-                    Bar bar = new Bar(CSS, m, m.getValue() / max);
+                    Bar bar = new Bar(css, m, m.getValue() / max);
                     bar.addClickHandler(event -> ValueChangeEvent.fire(BarChart.this, m));
                     container.add(bar);
                     bar.setWidth(100 / model.size() + "%");
