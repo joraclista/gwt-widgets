@@ -16,6 +16,7 @@ import com.github.joraclista.client.ui.widgets.snippets.CodeSnippet;
 import com.github.joraclista.client.ui.widgets.snippets.bundle.SnippetsBundle;
 import com.github.joraclista.client.ui.widgets.tocPanel.TocPanel;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -169,8 +170,22 @@ private TocPanel tocPanel;
                 new BarModel(-25, "-25")));
 
         barChart3.render(Arrays.asList(new BarModel(-10, "-10"),
+                new BarModel(-0, "0"),
+                new BarModel(-4.4, "-4.4"),
+                new BarModel(-77.7, "-77.7"),
+                new BarModel(-10, "-10"),
                 new BarModel(-98, "-98"),
-                new BarModel(-25, "-25")));
+                new BarModel(-25.6, "-25.6")));
+        ValueChangeHandler<BarModel> handler = event -> new Notification("Selected: " + event.getValue())
+                .withType(NotificationType.INFO)
+                .withPopupPosition(Position.CENTER)
+                .withArrowPosition(ArrowPosition.LEFT)
+                .withPopupCloseButtonVisibility(true)
+                .withPopupCloseOnBackgroundClick(true)
+                .show();
+        barChart1.addValueChangeHandler(handler);
+        barChart2.addValueChangeHandler(handler);
+        barChart3.addValueChangeHandler(handler);
     }
 
     private void addToRoot(IsWidget widget) {
